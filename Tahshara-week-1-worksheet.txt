@@ -1,0 +1,37 @@
+How do you plan on exhibiting professionalism at Techtonica? What would be different in a full-time engineering job setting?
+I plan on showing up on time, being very communicative, respectful of others, and staying true to my word.dvance Nothing would be different in the full time engineering setting.  
+What would you do if you just found out you are going to be an hour late tomorrow morning? 
+I would communicate with the SEAM and fellow members of my cohort to let them know. 
+What would you do if you realized that you only had time to finish most of your work by the due date of a group project? 
+I would get the most important task done, reach out to fellow group members and inform them of the situation see if they could assist me with my work load.
+Knowing yourself, what are the most effective ways for you to learn and retain new information?
+repition, repition, repetition.
+What is growth mindset?
+anything is possible with hard work, determination and consistency.
+Which operating system are you using right now? Name two other popular operating systems.
+Why do computers need operating systems?
+I'm using macOS and two popular systems are Android  and Microsoft Windows.
+Explain what you would do if you felt stuck on a coding problem.
+I would spend 20-25min trying fish for the answer and then I would break, come back to it and if i'm still stuck seek help from my peers, mentors, post question to stack overflow and etc.
+Describe the ways you plan on meeting and staying connected with new people in tech this month.
+I plan on attending meetups, hackathons, attend conferences and the like.
+Describe some examples of effective body language and what is communicated when they are used well.
+sitting up, open body i.e. hands unfolded and eyes being attentive. It communicates you have my attention and i'm fully engaged. 
+Describe some examples of effective word choice and what is communicated when they are used well.
+some effective word choices are, 
+1. I will try
+2. I will find out for you
+3. Would you mind waiting 
+these commicate a dialogue. 
+How can you build trust in a team? 
+Trust is built by Acknowledging and repairing when there is a lack of trust. Being  vulnerable make space for each group member to share and through working together
+How are the devices on the internet physically connected to each other?
+Connected through DNS.
+How is information physically transmitted from device to device?
+internet ships binary information through electricity, light and radio signals.
+How does one device find another it’s trying to communicate with?
+ISP connects you to other devices around the world. Every computer has an IP address and this is how computers communicate with one another.
+What methods do devices on the internet use to communicate?
+DNS 
+How can we send data reliably even if the network is unreliable?
+Data travels by separating data into packets and then TCP assures the packets format is correct.
