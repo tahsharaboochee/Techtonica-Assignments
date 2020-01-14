@@ -1,0 +1,55 @@
+body {
+    color:#603813;
+    background-image: url("./bg.jpg");
+    background-size: cover;
+    
+}
+
+header {
+    text-align: right;
+}
+
+h1 {
+    text-align: center;
+}
+
+.coffee {
+    background-image: url("./body-scrub.jpg");
+    background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:200px;
+    width:200px;
+    margin: 10px auto 20px;
+    display: block;
+}
+
+.header > li {
+    list-style: none;
+    display: inline-block;    
+}
+
+a {
+    color:#603813;
+    font-size: larger;
+}
+
+.about > img {
+    float: left;
+}
+
+footer {
+    clear: both;
+    text-align: center;
+}
+
+.about > h4 {
+    text-align: center;
+}
+
+.boxmodel {
+    border: 5px solid #603813;
+    display: inline-block;
+    padding: 5px 20px 5px 20px; /* top right bottom left  */
+    margin: 0px 20px;
+}

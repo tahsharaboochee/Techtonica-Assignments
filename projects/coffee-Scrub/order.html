@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Order Form</title>
+    <link rel="stylesheet" type='text/CSS' href="./coffee-scrub.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="header">
+                <li>
+                    <a href="./index.html"> Home</a>
+                </li>
+                <li>
+                    <a href="./about.html"> About</a>
+                </li>
+                <li>
+                    <a href="./login.html">Login</a>
+                </li>
+                <li>
+                    <a href="./order.html"> Order Product</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+    <form>
+    <h3> Mailing Address</h3>
+        First Name: <input type="text" name="first name" value="first name"><br>
+        Last Name: <input type="text" name="lasst name" value="last name"><br>
+        Email: <input type="email" name="email"><br>
+        Address: <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+        City: <input type="text" id="city" name="city" placeholder="San Francisco">
+        State: <input type="text" id="state" name="state" placeholder="CA">
+        Zip: <input type="text" id="zip" name="zip" placeholder="10001"><br>
+        
+        Order Quantity: <input type="number" name="Quantity" value="Quantity" min="1" max="100"><br>
+        <h3>Billing address</h3>
+        Same As Mailing Address<input type="checkbox" name="address" value="address"><br>
+        Different Billing Address:<input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+        City: <input type="text" id="city" name="city" placeholder="San Francisco">
+        State: <input type="text" id="state" name="state" placeholder="CA">
+        Zip: <input type="text" id="zip" name="zip" placeholder="10001"><br>
+        <input type="submit" value="Complete Order">
+        <input type="reset" value="Reset">
+    </form>
+    <a href="index.html"> 
+        <h2>Go Back</h2>
+    </a>
+</body>
+</html>
