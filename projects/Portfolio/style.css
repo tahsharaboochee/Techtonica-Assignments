@@ -1,0 +1,88 @@
+#main-header img {
+  width: 25%;
+  height: 25%;
+}
+
+#main-header .port-item {
+  width: 30%;
+}
+
+#main-header .port-item:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.bg-black {
+  color: #fff;
+  background: #000;
+}
+
+@media (min-width: 1199px) {
+  .port-item {
+    padding: 3em !important;
+  }
+}
+
+.aboutClass,
+.contact {
+  color: #343a40;
+}
+
+body {
+  padding-top: 70px;
+  background-color: aqua;
+}
+
+nav,
+a {
+  color: #343a40;
+}
+
+.rounded-circle {
+  width: 15%;
+  height: 15%;
+  /* overflow: hidden; */
+}
+
+body {
+  padding: 0;
+}
+
+.about {
+  font-size: larger;
+}
+
+.top {
+  background-color: aqua;
+}
+
+.massive-font{
+  font-size: 30px;
+  text-align: left;
+  }
+    
+  .progress{
+  height:50px;
+  text-align:center;
+  }
+  
+  .progress-bar {
+    padding:15px;
+  }
+
+ .bg-blue {
+   background-color: aqua;
+   border: none;
+  }
+
+  /* span, #stars3 {
+  background-color:black;
+background-image:
+radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+} */
+
