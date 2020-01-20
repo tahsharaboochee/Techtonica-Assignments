@@ -1,60 +1,41 @@
-body {
-    color:#603813;
-    background-image: url("./bg.jpg");
-    background-size: cover;
-    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.navbar {
-    border-bottom: #603813 3px solid;
-    /* opacity: 0.8; */
+html {
+    color: rgb(31, 24, 24);
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
 }
-
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
 header {
-    text-align: right;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.705)), url("./decorations-at-spa.jpg");
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
 }
-
+.hero-text-box {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 h1 {
-    text-align: center;
+    margin: 0;
+    color: #fff;
+    font-size: 240%;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 4px;
 }
 
-.coffee {
-    background-image: url("./body-scrub.jpg");
-    background-position:center;
-	background-repeat:no-repeat;
-	background-size:cover;
-	height:200px;
-    width:200px;
-    margin: 10px auto 20px;
-    display: block;
-}
-
-.header > li {
-    list-style: none;
-    display: inline-block;    
-}
-
-a {
-    color:#603813;
-    font-size: larger;
-}
-
-.about > img {
-    float: left;
-}
-
-footer {
-    clear: both;
-    text-align: center;
-}
-
-.about > h4 {
-    text-align: center;
-}
-
-.boxmodel {
-    border: 5px solid #603813;
-    display: inline-block;
-    padding: 5px 20px 5px 20px; /* top right bottom left  */
-    margin: 0px;
+.btn {
+    
 }
