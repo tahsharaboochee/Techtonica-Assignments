@@ -28,6 +28,7 @@ header {
 }
 h1 {
     margin: 0;
+    margin-bottom: 20px;
     color: #fff;
     font-size: 240%;
     font-weight: 300;
@@ -36,6 +37,42 @@ h1 {
     word-spacing: 4px;
 }
 
-.btn {
+.btn:link, 
+.btn:visited {
+    display: inline-block;
+    padding: 10px 30px; 
+    text-decoration: none;
+    border-radius: 200px;
+    transition: background-color 0.2s, border-0.2s, color 0.2s;
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color: #d45a09;
+    border: 1px solid #d45a09;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #d45a09; 
+    color: #d45a09;
     
+}
+.btn:hover,
+.btn:active {
+    background-color: #b34c08;
+}
+.btn-full:hover,
+.btn-full:active {
+    background-color: #b34c08;
+    border: 1px solid #b34c08;
+    color: #fff;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid #b34c08; 
+    color: #fff;
 }
