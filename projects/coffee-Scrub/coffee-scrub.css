@@ -1,3 +1,7 @@
+/* ---------------------------------- */
+/* Basic Setup */
+/* ---------------------------------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -9,23 +13,17 @@ html {
     font-size: 20px;
     text-rendering: optimizeLegibility;
 }
+/* ---------------------------------- */
+/* reusable components*/
+/* ---------------------------------- */
+
 .row {
     max-width: 1140px;
     margin: 0 auto;
+    
 }
-header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.705)), url("./decorations-at-spa.jpg");
-    background-size: cover;
-    height: 100vh;
-    background-position: center;
-}
-.hero-text-box {
-    position: absolute;
-    width: 1140px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+
+/*-------Headings---------*/
 h1 {
     margin: 0;
     margin-bottom: 20px;
@@ -36,7 +34,7 @@ h1 {
     letter-spacing: 1px;
     word-spacing: 4px;
 }
-
+/*-------Buttons---------*/
 .btn:link, 
 .btn:visited {
     display: inline-block;
@@ -76,3 +74,29 @@ h1 {
     border: 1px solid #b34c08; 
     color: #fff;
 }
+
+/* ---------------------------------- */
+/* Header*/
+/* ---------------------------------- */
+
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.705)), url("./decorations-at-spa.jpg");
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+}
+.hero-text-box {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* #logo {
+    border: 1px solid  #d45a09;
+    border-radius: 50%;
+    color: #d45a09
+
+} */
