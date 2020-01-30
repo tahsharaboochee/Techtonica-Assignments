@@ -9,31 +9,34 @@
   </head>
   <body>
     <h1>BooShay Boggle</h1>
-    <span>
-      <button id="start"><em>Start</em></button>
-    </span>
-    <span>
-      <button id="timer"><em>Timer</em></button>
-		</span>
 		<table id="wordList" class="wordListArea" border="0" style="text-align:right"></table>
-    <div class="grid-container">
-      <button id="0" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="1" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="2" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="3" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
-      <button id="4" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="5" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="6" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="7" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="8" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
-      <button id="9" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="10" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="11" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="12" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="13" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="14" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-      <button id="15" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
-		</div>
+    <div class="game">
+      <div class="grid">
+        <button id="0" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="1" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="2" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="3" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
+        <button id="4" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="5" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="6" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="7" onmousedon= "startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="8" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
+        <button id="9" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="10" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="11" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="12" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="13" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="14" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+        <button id="15" onmousedown="startWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      </div>
+    </div>
+    <div class="footer">
+      <button id="start"><em>Start</em></button>
+      <span>
+        <button id="timer"><em>Timer</em></button>
+      </span>
+    </div>
+    <!-- <h1 class="message">Game Over!</h1> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="words.js" />
     <script src="selectables.js"></script>

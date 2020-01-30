@@ -30,7 +30,7 @@
 		// array of played words
 		let boggleWords = new Array();
 		//flag for if string is being built currently
-		let mousedown = 0;
+		// let mousedown = 0;
 	
 		// Boggle dice
 		const die1 = ["A", "A", "E", "E", "G", "N"];
@@ -186,7 +186,7 @@
 
 		let storedLetters = "";
 
-		function buildWord(event) {
+		function startWord(event) {
 			//get the attribute of a targeted element
 			let die = event.target;
 			if (die.style.backgroundColor != "yellow") {
