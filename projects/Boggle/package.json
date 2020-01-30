@@ -1,0 +1,23 @@
+{
+  "name": "boggle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "board.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boocheet/Boggle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boocheet/Boggle/issues"
+  },
+  "homepage": "https://github.com/boocheet/Boggle#readme",
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "requirejs": "^2.3.6"
+  }
+}
