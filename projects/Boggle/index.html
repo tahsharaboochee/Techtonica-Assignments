@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booshay Boggle</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>BooShay Boggle</h1>
+    <span>
+      <button id="start"><em>Start</em></button>
+    </span>
+    <span>
+      <button id="timer"><em>Timer</em></button>
+		</span>
+		<table id="wordList" class="wordListArea" border="0" style="text-align:right"></table>
+    <div class="grid-container">
+      <button id="0" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="1" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="2" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="3" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
+      <button id="4" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="5" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="6" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="7" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="8" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>  
+      <button id="9" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="10" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="11" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="12" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="13" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="14" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+      <button id="15" onmousedown="buildWord(event)" onmousemove="buildingWord(event)" onmouseup="submitWord(event)"></button>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="words.js" />
+    <script src="selectables.js"></script>
+    <script type="text/javascript" src="board.js"></script>
+  </body>
+
+</html>
+
