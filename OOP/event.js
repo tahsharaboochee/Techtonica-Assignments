@@ -1,5 +1,5 @@
 class Event {
-  constructor(name, description, eventDate) {
+  constructor(name, description, eventDate = new Date()) {
     this.name = name;
     this.description = description;
     this.eventDate = eventDate;
@@ -76,6 +76,9 @@ $(document).ready(function() {
   $.each(eventArray, function(index, item) {
     html+= `<li>${item.name} - ${item.description} - ${item.searchTickets(0, 100)}</li>`;
   });
+  html += `<h3> Cheapest Ticket: $${eventObj3.cheapestTicket()} <h3>`
+  $('h3').css({ 'color': 'green', 'font-size': '150%' });
   // insert final html into #event...
   $("#event").html(html);
+  
 });
