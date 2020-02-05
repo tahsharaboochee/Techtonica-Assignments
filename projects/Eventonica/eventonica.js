@@ -3,7 +3,7 @@ class User {
     this.name = name;
     this.personalEvents = [];
   }
-  addToMyEvents (eventObj){
+  static addToMyEvents (eventObj){
     this.personalEvents.push(eventObj);
   }
 }
@@ -39,22 +39,26 @@ class EventRecommender {
 
   deleteUser(name) {
   // Deletes a User from the system
-  for (let i = 0; i < this.users.length; i++){
-      let curUser = this.users[i]
-      if(curUser.name === name){
+  // if (!this.users){
+  //   return "there are currently no users to delete add a user";
+  // }
+  this.users.forEach ((obj, i)=>{
+      if(obj['name'] === name){
         this.users.splice(i, 1);
       }
-    }
+    });
   }
 
   deleteEvent(event) {
   // Deletes the Event from the system
+  console.log(this.events);
    for (let i = 0; i < this.events.length; i++){
       let curevent = this.events[i]
       if(curevent.title === event){
         this.events.splice(i, 1);
       }
     }
+    console.log(this.events)
   }
 
   findEventsByDate(date){
@@ -86,16 +90,11 @@ const isEqual = function(obj1, obj2){
   return true;
 }
 
-let e = new User('me')
-e.addToMyEvents('example');
-let eR = new EventRecommender();
-eR.addUser(e)
-console.log(eR.users[0])
-eR.deleteUser('me')
-console.log(eR.users[0])
 
 // $(document).ready( () => {
 //   const eventRecommender = new EventRecommender();
 //   // Your code here
 // });
-module.exports = { EventRecommender, User, Event}
+if (typeof module != 'undefined'){
+  module.exports = {EventRecommender, User, Event} 
+}

@@ -23,28 +23,21 @@ describe("EventRecommender", () => {
     });
   });
 
-  describe("saveUserEvent", () => {
-    it("adds an event to a user's personal event array", () => {
-      er.addEvent('practice2', 'example2', new Date());
-      er.addUser('tom');
-      er.saveUserEvent("tom", "'practice2', 'example2', new Date()"); // change these to match your method signature
-      expect(er.user.personalEvents.length).toEqual(1);
+   
+
+  describe("deleteUser", () => {
+    it("removes a User from the system", () => {
+      er.addUser('susan');
+      er.deleteUser('susan');
+      expect(er.users.length).toEqual(0);
     });
   });
 
-  // describe("deleteUser", () => {
-  //   it("removes a User from the system", () => {
-  //     er.addUser('susan');
-  //     er.deleteUser('susan');
-  //     expect(er.user.length).toEqual(0);
-  //   });
-  // });
-
-  // describe("deleteEvent", () => {
-  //   it("removes the event from the system", () => {
-  //     er.addEvent("A new event that you will delete later");
-  //     er.deleteEvent('practice');
-  //     expect(er.events.length).toEqual(0);
-  //   });
-  // });
+  describe("deleteEvent", () => {
+    it("removes the event from the system", () => {
+      er.addEvent('practice1', 'example1', new Date());
+      er.deleteEvent('practice1');
+      expect(er.events.length).toEqual(0);
+    });
+  });
 });
