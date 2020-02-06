@@ -51,6 +51,7 @@ class EventRecommender {
       this.users.push(userObj);
       //users adding obj's to arr
       this.personalEvents[userObj.userId] = [];
+      // console.log(this.personalEvents)
   }
 
   deleteUser(id) {
@@ -64,6 +65,11 @@ class EventRecommender {
               this.users.splice(i, 1);
           }
       });
+      for (let i in this.personalEvents){
+        if (this.personalEvents[i][id] === id){
+          delete this.personalEvents[i][id];
+        }
+      }
   }
 
   deleteEvent(idEvent) {
@@ -95,42 +101,13 @@ findEventsByDate(date) {
 findEventsbyCategory(category) {
   // Returns all events in a given category
   return this.events.filter(function(obj) {
-      // console.log(obj.category)
       return obj.category === category;
   });
 }
 
-  saveUserEvent(userId, eventId) {
+  saveUserEvent(userObj, eventObj) {
       // Allow users to save events to a personal Events array.
-      // Does the user even exist?!
-      // console.log(this.users)
-
-      let validUser = this.users.filter((userObj) => {
-          return newUser.userId in userObj;
-      });
-      if (!validUser) {
-          return "User does not exist! please, add user.";
-      }
-      let validEvent = this.events.filter((eventObj) => {
-          return newEvent.eventId in eventObj;
-      }); // console.log(eventObj);
-      if (!validEvent) {
-          return "Event doesn't exist! please, add event.";
-      }
-
-      // if (this.users.includes(findUser(userId)) && this.events.includes(findEvent(eventId))){
-      //   let user = findUser(userId).userId;
-      //   let event = findEvent(eventId);
-      //     this.personalEvents[user].push
-      // }
-
-      // console.log(user);
-      for (let idx in this.personalEvents) {
-          if (this.personalEvents[idx].userId === user) {
-              this.personalEventSaver[idx].userId.push(event);
-          }
-      }
-      // console.log((user))
+      this.personalEvents[userObj.userId].push(eventObj);
   }
 
   // helper methods

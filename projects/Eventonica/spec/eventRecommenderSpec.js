@@ -73,14 +73,17 @@ describe("EventRecommender", () => {
     });
   });
 
-  // describe("saveUserEvent", () => {
-  //   it("adds an event to a user's personal event array", () => {
-  //     er.addEvent('bootstrap', 'frontEnd', new Date('2020-02-24'));
-  //     let u = er.addUser('tom');
-  //     er.saveUserEvent(u.userId, 'bootstrap', 'frontEnd', new Date('2020-02-24')); // change these to match your method signature
-  //     expect(er.user.personalEvents.length).toEqual(1);
-  //   });
-  // });
+  describe("saveUserEvent", () => {
+    it("adds an event to a user's personal event array", () => {
+      let nE = new Event('bootstrap', 'frontEnd', new Date('2020-02-24'))
+      er.addEvent(nE);
+      let newUser = new User('tom')
+      er.addUser(newUser);
+      er.saveUserEvent(newUser, nE); // change these to match your method signature
+
+      expect(er.personalEvents[newUser.userId].length).toEqual(1);
+    });
+  });
 
   // describe("findEventsByCategory", () => {
   //   it("Returns all events in a given date - DAN", () => {
@@ -102,19 +105,4 @@ describe("EventRecommender", () => {
   //     }
   //   });
   // });
-
-  // describe("saveUserEvent", () => {
-  //   it("Allow users to save events to a personal Events array.", () => {
-  //     er.addUser('tom')
-  //     er.addEvent('bootstrap', 'frontEnd', new Date('2020-02-24'));
-  //     er.saveUserEvent('tom', 'bootstrap', 'frontEnd', new Date('2020-02-24'));
-  //     er.findUser('tom');
-  
-  //     let result = er.findUser('tom')['personlEvents']
-  //     expect(result.length).toEqual(1);
-  //     // expect(result2.length).toEqual(0);
-  //   });
-  // });
-
-
 });
