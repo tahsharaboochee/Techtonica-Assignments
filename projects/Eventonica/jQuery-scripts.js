@@ -50,9 +50,9 @@ displayUser();
     let eventInfo = '';
     for (let event of er.events) {
       let day = event.eventDate.getUTCDate();
-      let month = event.eventDate.getUTCMonth();
+      let month = event.eventDate.getMonth() + 1;
       let year = event.eventDate.getUTCFullYear();
-      eventInfo += (`<li> Event: '${event.title}', ${month}/${day}/${year}, Event Id: ${event.eventId}</li>`);
+      eventInfo += (`<li> Event: '${event.title}'<br>Date:${month}/${day}/${year}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
     };
     $("#all-events").html(eventInfo);
   }
@@ -78,6 +78,53 @@ displayUser();
     displayEvent();
     $('#delete-event')[0].reset();    
   });
+
+
+    $('#date-search').submit(function (e){
+      e.preventDefault();
+      let edate = new Date($("#date-search").find('#date-search-id').val());
+      let results = er.findEventsByDate(edate);
+      for (let event of results) {
+        let eventInfo = '';
+        let day = event.eventDate.getUTCDate();
+        let month = event.eventDate.getUTCMonth() + 1;
+        let year = event.eventDate.getUTCFullYear();
+        eventInfo += (`<li> Event: '${event.title}'<br>Date:${month}/${day}/${year}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+        $("#search-results").html(eventInfo);
+      }
+      $('#date-search')[0].reset();    
+    });
+
+    $('#category-search').submit(function (e){
+      e.preventDefault();
+      let cat = $("#category-search").find('#category-search-id').val();
+      let results = er.findEventsbyCategory(cat);
+
+      for (let event of results) {
+        let eventInfo = '';
+        let day = event.eventDate.getUTCDate();
+        let month = event.eventDate.getUTCMonth() + 1;
+        let year = event.eventDate.getUTCFullYear();
+        eventInfo += (`<li> Event: '${event.title}'<br> Date:${month}/${day}/${year}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+        $("#category-search-results").html(eventInfo);
+      }
+      $('#category-search')[0].reset();    
+    });
+    
+    $('#save-user-event').submit(function(e){
+      e.preventDefault();
+      let eId = $("#save-user-event").find('#save-event-id').val();
+      let id = $("#save-user-event").find('#save-user-id').val();
+      
+      let event = er.findEvent(eId);
+  
+      let nE = new Event(name, eCategory, eDate, id);
+      er.saveUserEvent(event);
+      $('#save-user-event')[0].reset();
+    });
+  
+    
+  
 
 
 });

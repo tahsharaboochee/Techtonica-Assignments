@@ -93,16 +93,20 @@ findEventsByDate(date) {
           date1.getFullYear() === date2.getFullYear() &&
           date1.getMonth() === date2.getMonth();
   };
-  return this.events.filter(function(obj) {
+ let eventsByDate = this.events.filter(function(obj) {
+    console.log("objDates in comparison:", obj.eventDate, date)
       return checkDates(obj.eventDate, date);
   });
+  return eventsByDate;
 }
 
 findEventsbyCategory(category) {
   // Returns all events in a given category
-  return this.events.filter(function(obj) {
-      return obj.category === category;
+ let categoryResults = this.events.filter(function(obj) {
+      return obj['category'].trim() === category.trim();
   });
+  console.log("findEventByCategory", categoryResults)
+  return categoryResults;
 }
 
   saveUserEvent(userObj, eventObj) {
