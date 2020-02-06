@@ -41,14 +41,12 @@ displayUser();
   $('#delete-user').submit(function (e){
     e.preventDefault();
     let id = $("#delete-user").find('#delete-user-id').val();
-    console.log(id);
     er.deleteUser(id);
     displayUser();
     $('#delete-user')[0].reset();    
   });
 
   function displayEvent(){
-    console.log(er.events)
     let eventInfo = '';
     for (let event of er.events) {
       let day = event.eventDate.getUTCDate();
@@ -59,6 +57,7 @@ displayUser();
     $("#all-events").html(eventInfo);
   }
   displayEvent();
+
   $('#add-event').submit(function(e){
     e.preventDefault();
     let name = $("#add-event").find('#add-event-name').val();
@@ -66,9 +65,19 @@ displayUser();
     let eDate = $("#add-event").find('#add-event-category').val();
     let id = $("#add-event").find('#add-event-id').val();
 
-    let nE = new Event(name, eCategory, eDate, id)
+    let nE = new Event(name, eCategory, eDate, id);
     er.addEvent(nE);
     displayEvent();
     $('#add-event')[0].reset();
   });
+
+  $('#delete-event').submit(function (e){
+    e.preventDefault();
+    let id = $("#delete-event").find('#delete-event-id').val();
+    er.deleteEvent(id);
+    displayEvent();
+    $('#delete-event')[0].reset();    
+  });
+
+
 });
