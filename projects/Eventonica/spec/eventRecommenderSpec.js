@@ -1,8 +1,11 @@
+const {
+  EventRecommender,
+  User,
+  Event
+} = require('/Users/tahsharaboochee/codingPractice/techtonica/assignments/projects/Eventonica/eventonica.js'); // Update with your class names and file name
+let er;
 describe("EventRecommender", () => {
-  const { EventRecommender, User, Event } = require('/Users/tahsharaboochee/codingPractice/techtonica/assignments/projects/Eventonica/eventonica.js'); // Update with your class names and file name
-  let er; 
-  // console.log("EventRecommender:<---------", EventRecommender);
-
+  // console.log("EventRecommender:<---------", EventRecommender)
   beforeEach(() => {
     er = new EventRecommender();
     // console.log(er);
@@ -10,9 +13,9 @@ describe("EventRecommender", () => {
 
   describe("addEvent", () => {
     it("adds a new Event to the system", () => {
-      er.addEvent('practice', 'example', new Date());
+      er.addEvent('practice', 'science', new Date('2019-05-23'));
       expect(er.events.length).toEqual(1);
-      expect(er.events[0].title).toEqual('practice', 'example', new Date()); // what are some other things you can test?
+      expect(er.events[0].title).toEqual('practice', 'science', new Date('2020-05-23')); // what are some other things you can test?
     });
   });
 
@@ -23,7 +26,7 @@ describe("EventRecommender", () => {
     });
   });
 
-   
+
 
   describe("deleteUser", () => {
     it("removes a User from the system", () => {
@@ -35,9 +38,83 @@ describe("EventRecommender", () => {
 
   describe("deleteEvent", () => {
     it("removes the event from the system", () => {
-      er.addEvent('practice1', 'example1', new Date());
+      er.addEvent('practice1', 'data', new Date('2018-05-23'));
       er.deleteEvent('practice1');
       expect(er.events.length).toEqual(0);
     });
   });
+
+  describe("findEventsByDate", () => {
+    it("Returns all events on a given date", () => {
+      er.addEvent('practice1', 'data', new Date('2018-06-23'));
+      expect(er.findEventsByDate(new Date('2018-05-23'))).toEqual([]);
+      let result = er.findEventsByDate(new Date('2018-06-23'));
+      expect(result.length).toEqual(1);
+      expect(result[0].title).toEqual('practice1');
+      expect(result[0].category).toEqual('data');
+      expect(result[0].eventDate).toEqual(new Date('2018-06-23'));
+
+    });
+  });
+
+  describe("findEventsByCategory", () => {
+    it("Returns all events in a given category", () => {
+      let e = new Event('practice1', 'data', new Date('2018-05-23'));
+      er.addEvent('practice1', 'data', new Date('2018-05-23'));
+      er.addEvent('practice', 'science', new Date());
+      // expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
+
+      let result = er.findEventsbyCategory('data');
+      expect(result.length).toEqual(1);
+      expect(result[0].title).toEqual("practice1");
+      expect(result[0].category).toEqual("data");
+      expect(result[0].eventDate).toEqual(new Date('2018-05-23'));
+
+    });
+  });
+
+  describe("saveUserEvent", () => {
+    it("adds an event to a user's personal event array", () => {
+      er.addEvent('bootstrap', 'frontEnd', new Date('2020-02-24'));
+      let u = er.addUser('tom');
+      er.saveUserEvent(u.userId, 'bootstrap', 'frontEnd', new Date('2020-02-24')); // change these to match your method signature
+      expect(er.user.personalEvents.length).toEqual(1);
+    });
+  });
+
+  // describe("findEventsByCategory", () => {
+  //   it("Returns all events in a given date - DAN", () => {
+  //     let e = new Event('practice1', 'data', new Date('2018-05-23'));
+  //     er.addEvent('practice1', 'data', new Date('2018-05-23'));
+  //     er.addEvent('practice2', 'data', new Date('2018-05-24'));
+  //     er.addEvent('practice3', 'science', new Date('2018-05-23'));
+  //     let tests = [
+  //       ['2018-05-23', 2],
+  //       ['2018-05-24', 1],
+  //       ['2018-05-25', 0],
+  //       [null, 0],
+  //     ];
+  //     for (let test of tests) {
+  //       let dateParam = test[0];
+  //       let expectedResultLength = test[1];
+  //       let result = er.findEventsByDate(dateParam);
+  //       expect(result.length).toEqual(expectedResultLength);
+  //     }
+  //   });
+  // });
+
+  // describe("saveUserEvent", () => {
+  //   it("Allow users to save events to a personal Events array.", () => {
+  //     er.addUser('tom')
+  //     er.addEvent('bootstrap', 'frontEnd', new Date('2020-02-24'));
+  //     er.saveUserEvent('tom', 'bootstrap', 'frontEnd', new Date('2020-02-24'));
+  //     er.findUser('tom');
+  
+  //     let result = er.findUser('tom')['personlEvents']
+  //     expect(result.length).toEqual(1);
+  //     // expect(result2.length).toEqual(0);
+  //   });
+  // });
+
+
 });
