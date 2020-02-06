@@ -59,18 +59,19 @@ describe("EventRecommender", () => {
   describe("findEventsByCategory", () => {
     it("Returns all events in a given category", () => {
       let e = new Event('practice1', 'data', new Date('2018-05-23'));
-      er.addEvent('practice1', 'data', new Date('2018-05-23'));
-      er.addEvent('practice', 'science', new Date());
+      let e1 = new Event('practice', 'science', new Date())
+      er.addEvent(e);
+      er.addEvent(e1);
       // expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
 
-  //     let result = er.findEventsbyCategory('data');
-  //     expect(result.length).toEqual(1);
-  //     expect(result[0].title).toEqual("practice1");
-  //     expect(result[0].category).toEqual("data");
-  //     expect(result[0].eventDate).toEqual(new Date('2018-05-23'));
+      let result = er.findEventsbyCategory('data');
+      expect(result.length).toEqual(1);
+      expect(result[0].title).toEqual("practice1");
+      expect(result[0].category).toEqual("data");
+      expect(result[0].eventDate).toEqual(new Date('2018-05-23'));
 
-  //   });
-  // });
+    });
+  });
 
   // describe("saveUserEvent", () => {
   //   it("adds an event to a user's personal event array", () => {

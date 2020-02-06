@@ -54,15 +54,12 @@ class EventRecommender {
   }
 
   deleteUser(id) {
-    console.log(this.users);
       // Deletes a User from the system
-      // Does the user even exist?!
-      // console.log(this.users, id)
+      // Does the user even exist?
       if (this.users.length === 0) {
           return "there are currently no users to delete add a user";
       }
       this.users.forEach((obj, i) => {
-        console.log(obj, obj['userId'])
           if (obj['userId'] === id) {
               this.users.splice(i, 1);
           }
@@ -71,14 +68,36 @@ class EventRecommender {
 
   deleteEvent(idEvent) {
     // Deletes the Event from the system
-    // console.log(this.events);
     for (let i = 0; i < this.events.length; i++) {
         let curevent = this.events[i];
         if (curevent.eventId === idEvent) {
             this.events.splice(i, 1);
         }
     }
-    // console.log(this.events)
+}
+
+findEventsByDate(date) {
+  // Returns all events on a given date
+  if (date instanceof Date === false) {
+      date = new Date(date);
+  }
+
+  let checkDates = (date1, date2) => {
+      return date1.getUTCDate() === date2.getUTCDate() &&
+          date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth();
+  };
+  return this.events.filter(function(obj) {
+      return checkDates(obj.eventDate, date);
+  });
+}
+
+findEventsbyCategory(category) {
+  // Returns all events in a given category
+  return this.events.filter(function(obj) {
+      // console.log(obj.category)
+      return obj.category === category;
+  });
 }
 
   saveUserEvent(userId, eventId) {
@@ -114,32 +133,7 @@ class EventRecommender {
       // console.log((user))
   }
 
-  findEventsByDate(date) {
-      // Returns all events on a given date
-      if (date instanceof Date === false) {
-          date = new Date(date);
-      }
-
-      let checkDates = (date1, date2) => {
-          // console.log(date1)
-          return date1.getUTCDate() === date2.getUTCDate() &&
-              date1.getFullYear() === date2.getFullYear() &&
-              date1.getMonth() === date2.getMonth();
-      };
-      return this.events.filter(function(obj) {
-          return checkDates(obj.eventDate, date);
-      });
-  }
   // helper methods
-  findEventsbyCategory(category) {
-      // Returns all events in a given category
-      return this.events.filter(function(obj) {
-          // console.log(obj.category)
-          return obj.category === category;
-      });
-  }
-
-
   findEvent(eventId) {
       //returns eventId
       for (let key in this.events) {
