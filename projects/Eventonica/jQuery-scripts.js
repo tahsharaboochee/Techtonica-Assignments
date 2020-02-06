@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  let er = new EventRecommender();
+  const er = new EventRecommender();
   let newUser = new User('Tom','cf61b');
   let newUser2 = new User('Sally','996a0');
   let newUser3 = new User('Polly','569a1');
@@ -46,12 +46,29 @@ displayUser();
     displayUser();
     $('#delete-user')[0].reset();    
   });
-  // html += `<h3> Cheapest Ticket: $${eventObj3.cheapestTicket()} <h3>`
-  // $('h3').css({
-  //   'color': 'green',
-  //   'font-size': '150%'
-  // });
-  // insert final html into #event...
-  // $("#event").html(html);
 
+  function displayEvent(){
+    console.log(er.events)
+    let eventInfo = '';
+    for (let event of er.events) {
+      let day = event.eventDate.getUTCDate();
+      let month = event.eventDate.getUTCMonth();
+      let year = event.eventDate.getUTCFullYear();
+      eventInfo += (`<li> Event: '${event.title}', ${month}/${day}/${year}, Event Id: ${event.eventId}</li>`);
+    };
+    $("#all-events").html(eventInfo);
+  }
+  displayEvent();
+  $('#add-event').submit(function(e){
+    e.preventDefault();
+    let name = $("#add-event").find('#add-event-name').val();
+    let eCategory = $("#add-event").find('#add-event-date').val();
+    let eDate = $("#add-event").find('#add-event-category').val();
+    let id = $("#add-event").find('#add-event-id').val();
+
+    let nE = new Event(name, eCategory, eDate, id)
+    er.addEvent(nE);
+    displayEvent();
+    $('#add-event')[0].reset();
+  });
 });
