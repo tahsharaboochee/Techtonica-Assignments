@@ -1,8 +1,8 @@
 $(document).ready(function () {
   let er = new EventRecommender();
-  let newUser = new User('Tom');
-  let newUser2 = new User('Sally');
-  let newUser3 = new User('Polly');
+  let newUser = new User('Tom','cf61b');
+  let newUser2 = new User('Sally','996a0');
+  let newUser3 = new User('Polly','569a1');
   er.addUser(newUser);
   er.addUser(newUser2);
   er.addUser(newUser3);
@@ -32,12 +32,19 @@ displayUser();
     event.preventDefault();
     let id = $("#add-user").find('#add-user-id').val();
     let name = $("#add-user").find('#add-user-name').val();
-    let uE = new Event($("#add-user").find('#add-user-event').val());
-    console.log(id, name, uE)
-    // title, category, eventDate
-    er.addEvent(uE.title, uE.category, uE.eventDate);
-    er.addUser(name, id);
+    let nU = new User(name, id)
+    er.addUser(nU);
     displayUser();
+    $('#add-user')[0].reset();
+  });
+
+  $('#delete-user').submit(function (e){
+    e.preventDefault();
+    let id = $("#delete-user").find('#delete-user-id').val();
+    console.log(id);
+    er.deleteUser(id);
+    displayUser();
+    $('#delete-user')[0].reset();    
   });
   // html += `<h3> Cheapest Ticket: $${eventObj3.cheapestTicket()} <h3>`
   // $('h3').css({
