@@ -17,15 +17,18 @@ describe("EventRecommender", () => {
 
   describe("addUser", () => {
     it("adds a new User to the system", () => {
-      er.addUser('hank');
+      let newUser = new User('hank');
+      er.addUser(newUser['name'], newUser['userId']);
       expect(er.users.length).toEqual(1);
     });
   });
 
   describe("deleteUser", () => {
     it("removes a User from the system", () => {
-      er.addUser('susan');
-      er.deleteUser('susan');
+      let newUser = new User ('Susan');
+      er.addUser(newUser);
+      er.deleteUser(newUser['userId']);
+      //console.log(newUser['name'], newUser['userId']);
       expect(er.users.length).toEqual(0);
     });
   });

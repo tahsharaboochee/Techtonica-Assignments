@@ -40,19 +40,34 @@ class EventRecommender {
       this.events.push(newEvent); // events adding obj's to arr
   }
 
-  addUser(user) {
-      let newUser = new User(user);
+  addUser(userObj) {
       // Adds a new User to the System
-      let validUser = this.users.filter((userObj) => {
-          return newUser.userId in userObj;
+      let validUser = this.users.filter((curUserObj) => {
+          return userObj.userId in curUserObj;
       });
       if (validUser.length > 0) {
           return "User already exist!";
       }
       // Check if user already exists?
-      this.users.push(newUser);
+      this.users.push(userObj);
       //users adding obj's to arr
-      this.personalEvents[newUser.userId] = [];
+      this.personalEvents[userObj.userId] = [];
+  }
+
+  deleteUser(id) {
+    console.log(this.users);
+      // Deletes a User from the system
+      // Does the user even exist?!
+      // console.log(this.users, id)
+      if (this.users.length === 0) {
+          return "there are currently no users to delete add a user";
+      }
+      this.users.forEach((obj, i) => {
+        console.log(obj, obj['userId'])
+          if (obj['userId'] === id) {
+              this.users.splice(i, 1);
+          }
+      });
   }
 
   saveUserEvent(userId, eventId) {
@@ -86,20 +101,6 @@ class EventRecommender {
           }
       }
       // console.log((user))
-  }
-
-
-  deleteUser(name) {
-      // Deletes a User from the system
-      // Does the user even exist?!
-      if (!this.users) {
-          return "there are currently no users to delete add a user";
-      }
-      this.users.forEach((obj, i) => {
-          if (obj['userId'] === id) {
-              this.users.splice(i, 1);
-          }
-      });
   }
 
   deleteEvent(idEvent) {
