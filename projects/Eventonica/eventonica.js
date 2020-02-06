@@ -27,17 +27,16 @@ class EventRecommender {
       this.personalEvents = {};
   }
 
-  addEvent(name, category, eventDate) {
-      let newEvent = new Event(name, category, eventDate);
+  addEvent(eventObj) {
       // Adds a new Event to the System
-      let validEvent = this.events.filter((eventObj) => {
-          return newEvent.eventId in eventObj;
+      let validEvent = this.events.filter((curEventObj) => {
+          return eventObj.eventId in curEventObj;
       }); 
       // Check if event already exists?
       if (validEvent.length > 0) {
           return "Event already saved! please, save a different event.";
       }
-      this.events.push(newEvent); // events adding obj's to arr
+      this.events.push(eventObj); // events adding obj's to arr
   }
 
   addUser(userObj) {
@@ -70,6 +69,18 @@ class EventRecommender {
       });
   }
 
+  deleteEvent(idEvent) {
+    // Deletes the Event from the system
+    // console.log(this.events);
+    for (let i = 0; i < this.events.length; i++) {
+        let curevent = this.events[i];
+        if (curevent.eventId === idEvent) {
+            this.events.splice(i, 1);
+        }
+    }
+    // console.log(this.events)
+}
+
   saveUserEvent(userId, eventId) {
       // Allow users to save events to a personal Events array.
       // Does the user even exist?!
@@ -101,18 +112,6 @@ class EventRecommender {
           }
       }
       // console.log((user))
-  }
-
-  deleteEvent(idEvent) {
-      // Deletes the Event from the system
-      // console.log(this.events);
-      for (let i = 0; i < this.events.length; i++) {
-          let curevent = this.events[i];
-          if (curevent.eventId === idEvent) {
-              this.events.splice(i, 1);
-          }
-      }
-      // console.log(this.events)
   }
 
   findEventsByDate(date) {

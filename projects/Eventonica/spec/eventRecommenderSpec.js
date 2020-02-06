@@ -9,7 +9,8 @@ describe("EventRecommender", () => {
 
   describe("addEvent", () => {
     it("adds a new Event to the system", () => {
-      er.addEvent('practice', 'science', new Date('2019-05-23'));
+      let newEvent = new Event('practice1', 'science', new Date('2019-05-23'))
+      er.addEvent(newEvent);
       expect(er.events.length).toEqual(1);
       // expect(er.events[0].title).toEqual('practice', 'science', new Date('2020-05-23')); // what are some other things you can test?
     });
@@ -28,38 +29,39 @@ describe("EventRecommender", () => {
       let newUser = new User ('Susan');
       er.addUser(newUser);
       er.deleteUser(newUser['userId']);
-      //console.log(newUser['name'], newUser['userId']);
       expect(er.users.length).toEqual(0);
     });
   });
 
-  // describe("deleteEvent", () => {
-  //   it("removes the event from the system", () => {
-  //     er.addEvent('practice1', 'data', new Date('2018-05-23'));
-  //     er.deleteEvent('practice1');
-  //     expect(er.events.length).toEqual(0);
-  //   });
-  // });
+  describe("deleteEvent", () => {
+    it("removes the event from the system", () => {
+      let newEvent = new Event('practice1', 'data', new Date('2018-05-23'))
+      er.addEvent(newEvent);
+      er.deleteEvent(newEvent.eventId);
+      expect(er.events.length).toEqual(0);
+    });
+  });
 
-  // describe("findEventsByDate", () => {
-  //   it("Returns all events on a given date", () => {
-  //     er.addEvent('practice1', 'data', new Date('2018-06-23'));
-  //     expect(er.findEventsByDate(new Date('2018-05-23'))).toEqual([]);
-  //     let result = er.findEventsByDate(new Date('2018-06-23'));
-  //     expect(result.length).toEqual(1);
-  //     expect(result[0].title).toEqual('practice1');
-  //     expect(result[0].category).toEqual('data');
-  //     expect(result[0].eventDate).toEqual(new Date('2018-06-23'));
+  describe("findEventsByDate", () => {
+    it("Returns all events on a given date", () => {
+      let newEvent = new Event('practice1', 'data', new Date('2018-06-23'));
+      er.addEvent(newEvent);
+      expect(er.findEventsByDate(new Date('2018-05-23'))).toEqual([]);
+      let result = er.findEventsByDate(new Date('2018-06-23'));
+      expect(result.length).toEqual(1);
+      expect(result[0].title).toEqual('practice1');
+      expect(result[0].category).toEqual('data');
+      expect(result[0].eventDate).toEqual(new Date('2018-06-23'));
 
-  //   });
-  // });
+    });
+  });
 
-  // describe("findEventsByCategory", () => {
-  //   it("Returns all events in a given category", () => {
-  //     let e = new Event('practice1', 'data', new Date('2018-05-23'));
-  //     er.addEvent('practice1', 'data', new Date('2018-05-23'));
-  //     er.addEvent('practice', 'science', new Date());
-  //     // expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
+  describe("findEventsByCategory", () => {
+    it("Returns all events in a given category", () => {
+      let e = new Event('practice1', 'data', new Date('2018-05-23'));
+      er.addEvent('practice1', 'data', new Date('2018-05-23'));
+      er.addEvent('practice', 'science', new Date());
+      // expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
 
   //     let result = er.findEventsbyCategory('data');
   //     expect(result.length).toEqual(1);
