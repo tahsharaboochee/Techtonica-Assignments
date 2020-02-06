@@ -1,14 +1,20 @@
 $(document).ready(function () {
   let er = new EventRecommender();
-  er.addUser('Tom');
-  er.addUser('Sally');
-  er.addUser('Polly');
-  er.addEvent('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-  er.addEvent('Factorials!', 'Math', new Date('2020-02-17'));
-  er.addEvent('War and Peace', 'reading', new Date('2020-03-23'));
-  er.saveUserEvent('Polly', 'Beach Volley Ball', 'reading', new Date('2020-03-23'));
-  er.saveUserEvent('Polly', 'Factorials!', 'Math', new Date('2020-02-17'));
-  er.saveUserEvent('Sally', 'reading', new Date('2020-03-23'));
+  let newUser = new User('Tom');
+  let newUser2 = new User('Sally');
+  let newUser3 = new User('Polly');
+  er.addUser(newUser);
+  er.addUser(newUser2);
+  er.addUser(newUser3);
+  let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
+  let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
+  let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
+  er.addEvent(e);
+  er.addEvent(e2);
+  er.addEvent(e3);
+  er.saveUserEvent(newUser3, e);
+  er.saveUserEvent(newUser3, e2);
+  er.saveUserEvent(newUser2, e3);
 
 function displayUser(){
   let userInfo = '';
