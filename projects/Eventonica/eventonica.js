@@ -14,7 +14,7 @@ class Event {
   constructor(title, category, eventDate, eventId = Math.random().toString(16).substr(2, 5)) {
       this.title = title;
       this.category = category;
-      this.eventDate = eventDate;
+      this.eventDate = new Date(eventDate);
       this.eventId = eventId;
   }
 }
@@ -22,7 +22,8 @@ class Event {
 class EventRecommender {
   constructor() {
       this.events = [];
-      this.users = [];
+    //   console.log('constructor EventRecommender local storage get:', localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [])
+      this.users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
       //user is key personal events is value
       this.personalEvents = {};
   }
@@ -49,6 +50,7 @@ class EventRecommender {
       }
       // Check if user already exists?
       this.users.push(userObj);
+      localStorage.setItem("users", JSON.stringify(this.users));
       //users adding obj's to arr
       this.personalEvents[userObj.userId] = [];
       // console.log(this.personalEvents)

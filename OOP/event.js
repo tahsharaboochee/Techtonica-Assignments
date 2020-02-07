@@ -73,7 +73,7 @@ console.log(eventObj3.searchTickets(0, 25));
 
 $(document).ready(function() {
   let html = "";
-  $.each(eventArray, function(index, item) {
+  $.each(this.users, function(index, item) {
     html+= `<li>${item.name} - ${item.description} - ${item.searchTickets(0, 100)}</li>`;
   });
   html += `<h3> Cheapest Ticket: $${eventObj3.cheapestTicket()} <h3>`

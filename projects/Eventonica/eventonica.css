@@ -1,0 +1,38 @@
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  color: #fff;
+  background-color: #5995DA; 
+ padding: 20px 0;
+}
+
+.user {
+  display: flex;
+  border: 1px solid #fff;
+  width: 900px;
+  justify-content: space-between;
+}
+
+h1, h2 {
+  text-align: center;
+} 
+
+ul, ol {
+  list-style: none;
+}
+
+body {
+  padding-top: 70px;
+  background-color: aqua;
+}
+
+
+
+
+
+
+

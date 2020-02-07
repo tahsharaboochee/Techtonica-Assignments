@@ -1,5 +1,6 @@
+// // const fetch = require('node-fetch'); //wouldn't work when inside myDictionary
 // const myDictionary = function (word) {
-// 	const fetch = require('node-fetch');
+// 	// const fetch = require('node-fetch'); //when here get error 
 // 	fetch("https://gist.githubusercontent.com/jesseditson/1e6b2b524814320515ccfe7e2f856eda/raw/17d61fa1e80e14b13c4525b09f84148772586b59/words.json")
 // 		.then(myDictionary => myDictionary.json())
 // 		.then(myDictionary => {
@@ -9,17 +10,20 @@
 // 			return false;
 // 		});
 // }
-// myDictionary = [];
-// //storing the git file of english words into a var so it loads only one time
-// $.ajax({
-// 			url: "https://gist.githubusercontent.com/jesseditson/1e6b2b524814320515ccfe7e2f856eda/raw/17d61fa1e80e14b13c4525b09f84148772586b59/words.json"
-// 		})
-// 		.done(function (data) {
-// 			myDictionary = data.words
-// 			//filling the board after the dictionary file is stored in the the dictionary variable to ensure all words are valid
-// 			let start = document.getElementById('start'); 
-// 		  start.addEventListener("click", shuffleBoggleGrid)
-// 		})
+
+myDictionary = [];
+//storing the git file of english words into a var so it loads only one time
+$.ajax({
+			url: "https://gist.githubusercontent.com/jesseditson/1e6b2b524814320515ccfe7e2f856eda/raw/17d61fa1e80e14b13c4525b09f84148772586b59/words.json"
+		})
+		.done(function (data) {
+			// console.log('hello')
+			myDictionary = JSON.parse(data).words;
+			//filling the board after the dictionary file is stored in the the dictionary variable to ensure all words are valid
+			let start = document.getElementById('start'); 
+		  start.addEventListener("click", shuffleBoggleGrid)
+			console.log(myDictionary);
+		});
 
 
 
@@ -30,7 +34,7 @@
 		// array of played words
 		let boggleWords = new Array();
 		//flag for if string is being built currently
-		// let mousedown = 0;
+		let mousedown = 0;
 	
 		// Boggle dice
 		const die1 = ["A", "A", "E", "E", "G", "N"];
