@@ -58,14 +58,14 @@ class EventRecommender {
 
   addUser(userObj) {
     // Adds a new User to the System
-    let id = userObj['userId']
-    let validUser = false;
+    let id = userObj.userId
+    let validUser = true;
     this.users.forEach((curUserObj) =>{
       if (id === curUserObj.userId){
-        validUser = true;
+        validUser = false;
       }
     });
-    if(!validUser){return "User does not exist! please, add user."};
+    if(!validUser){return "User already exist!"};
     // Check if user already exists?
     this.users.push(userObj); //users adding obj's to arr
     this.personalEvents[id] = [];

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const er = new EventRecommender();
+   er = new EventRecommender();
   let newUser = new User('Tom','cf61b');
   let newUser2 = new User('Sally','996a0');
   let newUser3 = new User('Polly','569a1');
@@ -39,9 +39,9 @@ $(document).ready(function () {
  
 function displayUser(){
   let userInfo = '';
-  for (let user in er.users) {
-    // console.log(er.users[user])
-    userInfo += (`<li> ${er.users[user].name}</li>`);
+  console.log(er.users)
+  for (let user of er.users) {
+    userInfo += (`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
   };
   $("#all-users").html(userInfo);
 }
