@@ -44,7 +44,13 @@ class EventRecommender {
 
   addEvent(eventObj) {
     // Adds a new Event to the System
-    let validEvent = this.events.filter((eventObj) =>{return eventObj.eventId in eventObj; }); 
+    let cureventId = eventObj.eventId;
+    let validEvent = false;
+    this.events.forEach((curEventObj) =>{
+      if (cureventId === curEventObj.eventId){
+        validEvent = true;
+      }; 
+    });
     if(validEvent.length > 0){return "Event already saved! please, save a different event.";}
     this.events.push(eventObj); // events adding obj's to arr
   }
@@ -53,9 +59,10 @@ class EventRecommender {
   addUser(userObj) {
     // Adds a new User to the System
     let id = userObj['userId']
-    let validUser = this.users.filter((userObj) =>{
-      if (id in userObj){
-        return userObj;
+    let validUser = false;
+    this.users.forEach((curUserObj) =>{
+      if (id === curUserObj.userId){
+        validUser = true;
       }
     });
     if(!validUser){return "User does not exist! please, add user."};
