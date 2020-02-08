@@ -1,10 +1,8 @@
 const {EventRecommender, User, Event} = require('/Users/tahsharaboochee/codingPractice/techtonica/assignments/projects/Eventonica/eventonica.js'); // Update with your class names and file name
 let er;
 describe("EventRecommender", () => {
-  // console.log("EventRecommender:<---------", EventRecommender)
   beforeEach(() => {
     er = new EventRecommender();
-    // console.log(er);
   });
 
   describe("addEvent", () => {
@@ -19,7 +17,7 @@ describe("EventRecommender", () => {
   describe("addUser", () => {
     it("adds a new User to the system", () => {
       let newUser = new User('hank');
-      er.addUser(newUser['name'], newUser['userId']);
+      er.addUser(newUser);
       expect(er.users.length).toEqual(1);
     });
   });
@@ -62,7 +60,7 @@ describe("EventRecommender", () => {
       let e1 = new Event('practice', 'science', new Date())
       er.addEvent(e);
       er.addEvent(e1);
-      // expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
+      expect(JSON.stringify(er.findEventsbyCategory('data'))).toEqual(JSON.stringify([e]));
 
       let result = er.findEventsbyCategory('data');
       expect(result.length).toEqual(1);
@@ -84,25 +82,4 @@ describe("EventRecommender", () => {
       expect(er.personalEvents[newUser.userId].length).toEqual(1);
     });
   });
-
-  // describe("findEventsByCategory", () => {
-  //   it("Returns all events in a given date - DAN", () => {
-  //     let e = new Event('practice1', 'data', new Date('2018-05-23'));
-  //     er.addEvent('practice1', 'data', new Date('2018-05-23'));
-  //     er.addEvent('practice2', 'data', new Date('2018-05-24'));
-  //     er.addEvent('practice3', 'science', new Date('2018-05-23'));
-  //     let tests = [
-  //       ['2018-05-23', 2],
-  //       ['2018-05-24', 1],
-  //       ['2018-05-25', 0],
-  //       [null, 0],
-  //     ];
-  //     for (let test of tests) {
-  //       let dateParam = test[0];
-  //       let expectedResultLength = test[1];
-  //       let result = er.findEventsByDate(dateParam);
-  //       expect(result.length).toEqual(expectedResultLength);
-  //     }
-  //   });
-  // });
 });

@@ -1,8 +1,6 @@
 $(document).ready(function () {
   const er = new EventRecommender();
-
-  
-let loaded = localStorage.getItem('loaded') ? JSON.parse(localStorage.getItem('loaded')) : false;
+  let loaded = localStorage.getItem('loaded') ? JSON.parse(localStorage.getItem('loaded')) : false;
   if (!loaded){
     let newUser = new User('Tom','cf61b');
     let newUser2 = new User('Sally','996a0');
