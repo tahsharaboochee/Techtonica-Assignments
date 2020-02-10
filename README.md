@@ -8,8 +8,6 @@ From January 6th, 2020 until June 17th, 2020
 
 ## Assignments Directory
 
-- []()
-
 ### Useful Links
 
 - [Techtonica: Bridging the Tech Gap](https://techtonica.org/)
