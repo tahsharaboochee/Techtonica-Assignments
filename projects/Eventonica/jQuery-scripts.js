@@ -39,7 +39,6 @@ $(document).ready(function () {
  
 function displayUser(){
   let userInfo = '';
-  console.log(er.users)
   for (let user of er.users) {
     userInfo += (`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
   };
@@ -48,6 +47,7 @@ function displayUser(){
 displayUser();
 
 function dateFormatter(date){
+  date = new Date(date);
   let day = date.getDate();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
@@ -113,8 +113,8 @@ function dateFormatter(date){
       let results = er.findEventsByDate(edate);
       for (let event of results) {
         let eventInfo = '';
-        
-        eventInfo += (`<li> Event: '${event.title}'<br>Date:${month}/${day}/${year}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+        //console.log('jquery date-search:', event.title, dateFormatter(date), event.category, event.eventId)
+        eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
         $("#search-results").html(eventInfo);
       }
       $('#date-search')[0].reset();    
@@ -136,12 +136,10 @@ function dateFormatter(date){
     $('#save-user-event').submit(function(e){
       e.preventDefault();
       let eId = $("#save-user-event").find('#save-event-id').val();
-      let id = $("#save-user-event").find('#save-user-id').val();
-      
+      let uId = $("#save-user-event").find('#save-user-id').val();
+      let id = er.findUser(uId);
       let event = er.findEvent(eId);
-  
-      let nE = new Event(name, eCategory, eDate, id);
-      er.saveUserEvent(event);
+      er.saveUserEvent(id, event);
       $('#save-user-event')[0].reset();
     });
   

@@ -51,7 +51,7 @@ class EventRecommender {
         validEvent = true;
       }; 
     });
-    if(validEvent.length > 0){return "Event already saved! please, save a different event.";}
+    if(validEvent){return "Event already saved! please, save a different event.";}
     this.events.push(eventObj); // events adding obj's to arr
   }
   
@@ -123,9 +123,9 @@ class EventRecommender {
     if (date instanceof Date === false) {
       date = new Date(date);
     }
-
+    
     let checkDates = (date1, date2) => {
-      return date1.getUTCDate() === date2.getUTCDate() &&
+      return date1.getDate() === date2.getDate() &&
         date1.getFullYear() === date2.getFullYear() &&
         date1.getMonth() === date2.getMonth()
     }
