@@ -12,7 +12,7 @@
 
     <body>
         <div class="container">
-            <nav class="py-5 mb-1 navbar navbar-expand-lg navbar sticky-top bg-light lighten-1 text-light">
+            <nav class="py-5 mb-1 navbar navbar-expand-lg navbar sticky-top lighten-1 text-light">
                 <div class="container text-light">
             
                   <a class="navbar-brand" href="#">Eventonica</a>
@@ -31,46 +31,85 @@
                         <a class="nav-link" href="#date-search">Search</a>
                       </li>
                     </ul>
+                  </div>
                     <form class="form-inline active-cyan-3 active-cyan-4">
                         <i class="fas fa-search" aria-hidden="true"></i>
                         <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
                           aria-label="Search">
                     </form>
                 </div>
-              </nav>
-            <h1 class="form-container-title">Event Recommender</h1>
+            </nav>
+            <h1 class="container form-title">Event Recommender</h1>
 
-            <h2>User Management</h2>
-            <h3>All Users</h3>
-            <div class="user">
-                <ul id="all-users">
-                    <!-- Use jQuery to display all Users here -->
-                </ul>
-
-                <h3>Add User</h3>
-                <form class="form" id="add-user">
-                    <label>User ID:</label>
-                    <input type="text" id="add-user-id">
-                    <br/>
-                    <label>User name:</label>
-                    <input type="text" id="add-user-name">
-                    <br/>
-                    <!-- Add more form fields here -->
-                    <input type="submit">
-                </form>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <h2>User Management</h2>
+                        <div class="card-title">
+                            <h3>All Users</h3>
+                            <div class="card-text ">
+                                <div class="user">
+                                    <ul id="all-users">
+                                        <!-- Use jQuery to display all Users here -->
+                                    </ul>
+                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="user deleted-users flex items-start justify-start">
-                <h3>Delete User</h3>
-                <form id="delete-user">
-                    <label>User ID:</label>
-                    <input type="text" id="delete-user-id">
-                    <br/>
-                    <input type="submit">
-                </form>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Add User</h3>
+                            <div class="card-text">
+                                <form class="form-inline" id="add-user">
+                                        <label class="sr-only" for="add-user-id"></label>
+                                        <div class="input-group mb-2 mx-sm-2">
+                                            <div class="input-group-text">User Id</div>
+                                        </div>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-id" placeholder="996a0">
+                                        
+                                        <label class="sr-only" for="add-user-name"></label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-text">User Name</div>
+                                        </div>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-name" placeholder="JaneDoe">
+                                        <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add User</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <br/>
+         
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Delete User</h3>
+                            <div class="card-text ">
+                                <form class="form-inline" id="delete-user">
+                                    <label class="sr-only" for="delete-user-id"></label>
+                                    <div class="input-group mb-2 mx-sm-2">
+                                        <div class="input-group-text">User Id</div>
+                                    </div>
+                                    <input type="text" class="form-control mb-2 mr-sm-2" id="delete-user-id" placeholder="996a0">
+                                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete User</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+
 
             <h2>Event Management</h2>
             <div class="events flex-1">
@@ -89,10 +128,16 @@
                     <input type="text" id="add-event-name">
                     <br/>
                     <label>Event Category:</label>
-                    <input type="text" id="add-event-category">
+                    <select id="add-event-category">
+                    <option value = "Concerts">Concerts</option>
+                    <option value = "Sports">Sports</option>
+                    <option value = "Arts & Theater">Arts & Theater</option>
+                    <option value = "Family">Family</option>
+                    </select>
                     <br/>
                     <label>Event Date:</label>
-                    <input type="text" id="add-event-date">
+                    <input type="date" id="add-event-date" value="2020-02-14"
+                    min="2020-01-01" max="2020-12-31">
                     <br/>
                     <label>User Personal Events:</label>
                     <input type="text" id="add-user-event">
@@ -105,7 +150,6 @@
                 <form id="delete-event">
                     <label>Event ID:</label>
                     <input type="text" id="delete-event-id">
-                    <br/>
                     <input type="submit">
                 </form>
             </div>
@@ -119,8 +163,8 @@
                 <h3>Find Events by Date</h3>
                 <form id="date-search">
                     <label>Event date:</label>
-                    <input type="text" id="date-search-id">
-                    <br/>
+                    <input type="date" id="date-search-id"  value="2020-02-14"
+                    min="2020-01-01" max="2020-12-31">
                     <input type="submit">
                 </form>
                 <h4>Results:</h4>
@@ -128,13 +172,18 @@
                     <!-- Use jQuery to add search results here-->
                 </ol>
             </div>
+            
 
             <div class="eventFinder">
                 <h3>Find Events by Category</h3>
                 <form id="category-search">
                     <label>Event category:</label>
-                    <input type="text" id="category-search-id">
-                    <br/>
+                    <select id = "category-search-id">
+                        <option value = "Concerts">Concerts</option>
+                        <option value = "Sports">Sports</option>
+                        <option value = "Arts & Theater">Arts & Theater</option>
+                        <option value = "Family">Family</option>
+                    </select>
                     <input type="submit">
                 </form>
                 <h4> Results:</h4>

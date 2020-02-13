@@ -2,11 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: lightblue; 
 }
 
-.container {
-  color: #fff;
-  background-color: navy; 
+.navbar {
+  color: #fff; 
   padding: 20px 0;
   text-decoration: none;
 }
