@@ -40,11 +40,33 @@
                 </div>
             </nav>
             <h1 class="container form-title">Event Recommender</h1>
-
-            <div class="card-deck">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Save Event for User</h3>
+                        <div class="card-text eventSaver">
+                            <form class="form-inline"  id="save-user-event">
+                                <label class="sr-only" for="save-user-id"></label>
+                                    <div class="input-group mb-2 mx-sm-2">
+                                        <div class="input-group-text">User ID</div>
+                                    </div>
+                                    <input type="text" class="form-control mb-2 mr-sm-2" id="save-user-id" placeholder="996a0">
+                                    
+                                    <label class="sr-only userId" for="save-event-id"></label>
+                                    <div class="input-group mb-2 mr-sm-2">
+                                        <div class="input-group-text"> Event ID</div>
+                                    </div>
+                                    <input type="text" class="form-control mb-2 mr-sm-2" id="save-event-id" placeholder="JaneDoe">
+                                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">save</button>                            
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-group">
                 <div class="card">
                     <div class="card-body bg-light">
-                        <h2>User Management</h2>
+                        <h2>User Display</h2>
                         <div class="card-title">
                             <h3>All Users</h3>
                             <div class="card-text ">
@@ -59,9 +81,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <h2>Events Display</h2>
+                        <div class="card-title">
+                            <h3>All Events</h3>
+                            <div class="card-text ">
+                                <div class="events">
+                                    <ul id="all-events">
+                                        <!-- Use jQuery to display all Events here -->
+                                    </ul>
+                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card-deck">
+            <div class="card-group">
                 <div class="card">
                     <div class="card-body bg-light">
                         <div class="card-title text-center">
@@ -70,13 +109,13 @@
                                 <form class="form-inline" id="add-user">
                                         <label class="sr-only" for="add-user-id"></label>
                                         <div class="input-group mb-2 mx-sm-2">
-                                            <div class="input-group-text">User Id</div>
+                                            <div class="input-group-text">Id</div>
                                         </div>
                                         <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-id" placeholder="996a0">
                                         
-                                        <label class="sr-only" for="add-user-name"></label>
+                                        <label class="sr-only userId" for="add-user-name"></label>
                                         <div class="input-group mb-2 mr-sm-2">
-                                            <div class="input-group-text">User Name</div>
+                                            <div class="input-group-text"> Name</div>
                                         </div>
                                         <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-name" placeholder="JaneDoe">
                                         <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add User</button>
@@ -85,10 +124,117 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Add Event</h3>
+                            <div class="card-text">
+                                <form class="form-inline" id="add-event">
+                                        <label class="sr-only" for="add-event-id"></label>
+                                        <div class="input-group mb-2 mx-sm-2">
+                                            <div class="input-group-text">Id</div>
+                                        </div>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-id" placeholder="996a0">
+                                        
+                                        <label class="sr-only" for="add-event-name"></label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-text">Name</div>
+                                        </div>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-name" placeholder="JaneDoe">
+                                        <label class="sr-only" for="add-event-category"></label>
+                                        <div class="input-group mb-2 mx-sm-2">
+                                            <div class="input-group-text">Category</div>
+                                        </div>
+                                        <select class="form-control mb-2 mr-sm-2" id="add-event-category">
+                                            <option value = "Concerts">Concerts</option>
+                                            <option value = "Sports">Sports</option>
+                                            <option value = "Arts & Theater">Arts & Theater</option>
+                                            <option value = "Family">Family</option>
+                                            </select>
+                                        
+                                        <label class="sr-only" for="add-event-date"></label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-text">Event Date</div>
+                                        </div>
+                                        <input type="date" class="form-control mb-2 mr-sm-2" id="add-event-date" value="2020-02-14"
+                                        min="2020-01-01" max="2020-12-31">
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="add-user-event">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-text">Save Event to User-Id</div>
+                                                    </div> 
+                                                </label>
+                                                <input class="form-check-input  mb-2 mr-sm-2" type="checkbox" value="" id="add-user-event">
+                                            </div>
+                                          </div>
+                                        <!-- <label class="sr-only" for="add-user-event"></label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-text">Save Event to User-Id</div>
+                                        </div>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-event" placeholder="Techtonica"> -->
+                                        <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add Event</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Find Events by Date</h3>
+                            <div class="card-text">
+                                <form class="form-inline" id="date-search">
+                                    <label class="sr-only" for="date-search-id"></label>
+                                    <div class="input-group mb-2 mx-sm-2">
+                                        <div class="input-group-text">Event Date</div>
+                                    </div>
+                                    <input type="text" class="form-control mb-2 mr-sm-2" id="date-search-id" value="2020-02-14"
+                                    min="2020-01-01" max="2020-12-31">
+                                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Submit</button>
+                                </form>
+                                <h4>Results:</h4>
+                                <ol id="search-results">
+                                    <!-- Use jQuery to add search results here-->
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Find Event by Category</h3>
+                            <div class="card-text">
+                                <div class="eventFinder">
+                                </div>
+                                <form class="form-inline" id="category-search">
+                                    <label class="sr-only" for="add-event-category"></label>
+                                    <div class="input-group mb-2 mx-sm-2">
+                                        <div class="input-group-text">Category</div>
+                                    </div>
+                                    <select class="form-control mb-2 mr-sm-2" id="category-search-id">
+                                        <option value = "Concerts">Concerts</option>
+                                        <option value = "Sports">Sports</option>
+                                        <option value = "Arts & Theater">Arts & Theater</option>
+                                        <option value = "Family">Family</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add Event</button>
+                                </form>
+                                <h4> Results:</h4>
+                                <ol id="category-search-results">
+                                    <!-- Use jQuery to add search results here-->
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
          
-            <div class="card-deck">
+            <div class="card-group">
                 <div class="card">
                     <div class="card-body bg-light">
                         <div class="card-title text-center">
@@ -106,106 +252,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <div class="card-title text-center">
+                            <h3>Delete Event</h3>
+                            <div class="card-text ">
+                                <form class="form-inline" id="delete-event">
+                                    <label class="sr-only" for="delete-event-id"></label>
+                                    <div class="input-group mb-2 mx-sm-2">
+                                        <div class="input-group-text">Event Id</div>
+                                    </div>
+                                    <input type="text" class="form-control mb-2 mr-sm-2" id="delete-event-id" placeholder="996a0">
+                                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete Event</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-
-
-
-            <h2>Event Management</h2>
-            <div class="events flex-1">
-                <h3>All Events</h3>
-                <ul id="all-events">
-                    <!-- Use jQuery to display all Events here -->
-                </ul>
-
-                <h3>Add Event</h3>
-                <form class="flex-2" id="add-event">
-                    <div></div>
-                    <label class="">Event ID:</label>
-                    <input type="text" id="add-event-id">
-                    <br/>
-                    <label>Event name:</label>
-                    <input type="text" id="add-event-name">
-                    <br/>
-                    <label>Event Category:</label>
-                    <select id="add-event-category">
-                    <option value = "Concerts">Concerts</option>
-                    <option value = "Sports">Sports</option>
-                    <option value = "Arts & Theater">Arts & Theater</option>
-                    <option value = "Family">Family</option>
-                    </select>
-                    <br/>
-                    <label>Event Date:</label>
-                    <input type="date" id="add-event-date" value="2020-02-14"
-                    min="2020-01-01" max="2020-12-31">
-                    <br/>
-                    <label>User Personal Events:</label>
-                    <input type="text" id="add-user-event">
-                    <input type="submit">
-                </form>
-            </div>
-
-            <div class='deleted-events' >
-                <h3>Delete Event</h3>
-                <form id="delete-event">
-                    <label>Event ID:</label>
-                    <input type="text" id="delete-event-id">
-                    <input type="submit">
-                </form>
-            </div>
-
-        <!-- </div> -->
-
-            <br/>
-
-            <h2>Event Search and Save</h2>
-            <div class="search">
-                <h3>Find Events by Date</h3>
-                <form id="date-search">
-                    <label>Event date:</label>
-                    <input type="date" id="date-search-id"  value="2020-02-14"
-                    min="2020-01-01" max="2020-12-31">
-                    <input type="submit">
-                </form>
-                <h4>Results:</h4>
-                <ol id="search-results">
-                    <!-- Use jQuery to add search results here-->
-                </ol>
-            </div>
-            
-
-            <div class="eventFinder">
-                <h3>Find Events by Category</h3>
-                <form id="category-search">
-                    <label>Event category:</label>
-                    <select id = "category-search-id">
-                        <option value = "Concerts">Concerts</option>
-                        <option value = "Sports">Sports</option>
-                        <option value = "Arts & Theater">Arts & Theater</option>
-                        <option value = "Family">Family</option>
-                    </select>
-                    <input type="submit">
-                </form>
-                <h4> Results:</h4>
-                <ol id="category-search-results">
-                    <!-- Use jQuery to add search results here-->
-                </ol>
-            </div>
-
-            <div class="eventSaver">
-                <h3>Save Event for User</h3>
-                <form id="save-user-event">
-                    <label>User ID:</label>
-                    <input type="text" id="save-user-id">
-                    <br/>
-                    <label>Event ID:</label>
-                    <input type="text" id="save-event-id">
-                    <br/>
-                    <input type="submit">
-                </form>
-            </div>
-
-        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
