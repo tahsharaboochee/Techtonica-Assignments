@@ -1,4 +1,24 @@
 $(document).ready(function () {
+  //search using jquery
+  $('#keyword-search').submit(function(event){
+    event.preventDefault();
+    let userInfo = $('#keyword-search-value').val();
+    $('#keyword-search')[0].reset();
+  });
+  // $.ajax({
+  //   type:"GET",
+  //   url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
+  //   async:true,
+  //   dataType: "json",
+  //   success: function(json) {
+  //               console.log(json);
+  //               // Parse the response.
+  //               // Do other things.
+  //            },
+  //   error: function(xhr, status, err) {
+  //               // This time, we do not end up here!
+  //            }
+  // });
    er = new EventRecommender();
   let newUser = new User('Tom','cf61b');
   let newUser2 = new User('Sally','996a0');
