@@ -1,15 +1,10 @@
-  * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: lightblue; 
 }
 
-.container {
-  color: #fff;
-  background-color: navy; 
-  padding: 20px 0;
-  text-decoration: none;
-}
 
 h1{
   text-align: center;
@@ -31,24 +26,9 @@ body {
   padding-top: 70px;
  
 }
-.flex {
-  display: flex;
-}
 
-.flex-1 {
-  flex: 1;
-}
-.flex-2 {
-  flex-direction: column;
-  justify-content: 2;
-}
-
-items-start {
-  align-items: flex-start;
-}
-
-justifiy-start {
-  justify-content: flex-start;
+.userId {
+  display:block;
 }
 
 .form-container {
@@ -61,6 +41,6 @@ justifiy-start {
   background-color: white;
 }
 
-.form-new {
+.form {
   border-top: 1px solid white;
 }

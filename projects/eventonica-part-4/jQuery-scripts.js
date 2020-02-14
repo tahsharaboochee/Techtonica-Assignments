@@ -1,10 +1,27 @@
 $(document).ready(function () {
+  er = new EventRecommender();
+   let newUser = new User('Tom','cf61b');
+   let newUser2 = new User('Sally','996a0');
+   let newUser3 = new User('Polly','569a1');
+   er.addUser(newUser);
+   er.addUser(newUser2);
+   er.addUser(newUser3);
+   let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
+   let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
+   let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
+   er.addEvent(e);
+   er.addEvent(e2);
+   er.addEvent(e3);
+   er.saveUserEvent(newUser3, e);
+   er.saveUserEvent(newUser3, e2);
+   er.saveUserEvent(newUser2, e3);
   //search using jquery
-  $('#keyword-search').submit(function(event){
-    event.preventDefault();
-    let userInfo = $('#keyword-search-value').val();
-    $('#keyword-search')[0].reset();
-  });
+  // $('#keyword-search').submit(function(event){
+  //   event.preventDefault();
+  //   let userInfo = $('#keyword-search-value').val();
+  //   $('#keyword-search')[0].reset();
+  // });
+  //beginning process of using jquery to call API
   // $.ajax({
   //   type:"GET",
   //   url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
@@ -19,44 +36,7 @@ $(document).ready(function () {
   //               // This time, we do not end up here!
   //            }
   // });
-   er = new EventRecommender();
-  let newUser = new User('Tom','cf61b');
-  let newUser2 = new User('Sally','996a0');
-  let newUser3 = new User('Polly','569a1');
-  er.addUser(newUser);
-  er.addUser(newUser2);
-  er.addUser(newUser3);
-  let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-  let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-  let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-  er.addEvent(e);
-  er.addEvent(e2);
-  er.addEvent(e3);
-  er.saveUserEvent(newUser3, e);
-  er.saveUserEvent(newUser3, e2);
-  er.saveUserEvent(newUser2, e3);
-  //below i put the hard coded data in an if statement so the local storage wouldn't duplicate the local storage. 
-  // let loaded = localStorage.getItem('loaded') ? JSON.parse(localStorage.getItem('loaded')) : false;
-  // if (!loaded){
-  //   let newUser = new User('Tom','cf61b');
-  //   let newUser2 = new User('Sally','996a0');
-  //   let newUser3 = new User('Polly','569a1');
-  //   er.addUser(newUser);
-  //   er.addUser(newUser2);
-  //   er.addUser(newUser3);
   
-  //   let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-  //   let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-  //   let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-  //   er.addEvent(e);
-  //   er.addEvent(e2);
-  //   er.addEvent(e3);
-  //   er.saveUserEvent(newUser3, e);
-  //   er.saveUserEvent(newUser3, e2);
-  //   er.saveUserEvent(newUser2, e3);
-  //   loaded = localStorage.setItem("loaded", JSON.stringify(true));;
-  // }
- 
 function displayUser(){
   let userInfo = '';
   for (let user of er.users) {
@@ -164,3 +144,43 @@ function dateFormatter(date){
     });
   
 });
+
+//below i put the hard coded data in an if statement so the local storage wouldn't duplicate the local storage. 
+//   er = new EventRecommender();
+//  let newUser = new User('Tom','cf61b');
+//  let newUser2 = new User('Sally','996a0');
+//  let newUser3 = new User('Polly','569a1');
+//  er.addUser(newUser);
+//  er.addUser(newUser2);
+//  er.addUser(newUser3);
+//  let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
+//  let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
+//  let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
+//  er.addEvent(e);
+//  er.addEvent(e2);
+//  er.addEvent(e3);
+//  er.saveUserEvent(newUser3, e);
+//  er.saveUserEvent(newUser3, e2);
+//  er.saveUserEvent(newUser2, e3);
+ // below is with local storage
+  // let loaded = localStorage.getItem('loaded') ? JSON.parse(localStorage.getItem('loaded')) : false;
+  // if (!loaded){
+  //   let newUser = new User('Tom','cf61b');
+  //   let newUser2 = new User('Sally','996a0');
+  //   let newUser3 = new User('Polly','569a1');
+  //   er.addUser(newUser);
+  //   er.addUser(newUser2);
+  //   er.addUser(newUser3);
+  
+  //   let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
+  //   let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
+  //   let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
+  //   er.addEvent(e);
+  //   er.addEvent(e2);
+  //   er.addEvent(e3);
+  //   er.saveUserEvent(newUser3, e);
+  //   er.saveUserEvent(newUser3, e2);
+  //   er.saveUserEvent(newUser2, e3);
+  //   loaded = localStorage.setItem("loaded", JSON.stringify(true));;
+  // }
+ 
