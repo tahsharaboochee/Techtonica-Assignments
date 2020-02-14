@@ -33,15 +33,18 @@ body {
   display:block;
 }
 
-form {
-  /* border-top: 1px solid white; */
-}
-/* 
+
+
 #root {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.card {
+  margin: 1rem;
+  border: 1px solid gray;
+}
+/*
 .container {
   display: flex;
   flex-wrap: wrap;
