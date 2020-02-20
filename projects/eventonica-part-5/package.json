@@ -1,0 +1,20 @@
+{
+  "name": "eventonica-part-5",
+  "version": "1.0.0",
+  "description": "eventonica project",
+  "main": "index.js",
+  "@comment type" :[
+    "this is needed if using eS6 type: module"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tahshara Boochee",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jade": "^1.11.0",
+    "joi": "^14.3.1"
+  }
+}

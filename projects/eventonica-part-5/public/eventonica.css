@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: lightblue; 
+}
+
+
+h1{
+  text-align: center;
+}
+h2 {
+  text-align: center;
+  border-radius: 8px; 
+} 
+h3 {
+  text-align: center;
+  border-radius: 8px; 
+} 
+
+ul, ol {
+  list-style: none;
+}
+
+body {
+  font-size: 1rem; 
+  line-height: 1;
+  padding-top: 70px;
+ 
+}
+
+.userId {
+  display:block;
+}
+
+form {
+  /* border-top: 1px solid white; */
+}
+/* 
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1rem;
+  border: 1px solid gray;
+}
+
+@media screen and (min-width: 600px) {
+  .card {
+    flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .card {
+    flex: 1 1 calc(33% - 2rem);
+  }
+}
+ */
