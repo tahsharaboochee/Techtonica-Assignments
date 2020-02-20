@@ -1,0 +1,42 @@
+Exercise 1.
+Imagine you are creating a website to organize your personal recipe collection. You want to be able to:
+
+See the recipe name and description
+Filter by vegetarian or non-vegetarian recipes
+Sort by date added to your collection
+Filter by which meal of the day the recipe is for
+Track how many times you've made each recipe
+Find out which friend gave you this recipe (if any)
+
+Make a data model for this app, and answer the following questions:
+What is the entity? 
+recipe entity
+
+What are the attributes of the entity?
+attribute entitiy: id, name, description, source(i.e. how recipe was found), dietary restrictions(bool), date(date recipe was aquired), times recipe has been used, meal it was for(breakfast lunch or dinner)
+
+What is the primary key of the entity?
+id
+
+What are the data types of the attributes?
+string, boolean, integers, and Date/datetime
+
+Are there other ways you might model this data?
+Recipe:
+id: 1
+name: Apple pie
+description: taste really good
+source: tasteofhome.com
+dietary-restrictions: true
+date: 2020-02-20
+times-made: 0
+meal: dinner
+
+Exercise 2.
+In your own words, define the following terms:
+
+Entity- what the individual data model is being applied to. 
+Attribute- characteristics of the entity
+Data type - string, booleen, integer, float, Varchar, Date/datetime
+Primary key - unique identification
+Schema -  all of the above applied to one instance of an entity. 
