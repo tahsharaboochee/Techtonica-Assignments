@@ -82,7 +82,10 @@ app.put('/api/userEvents/:id', (req, res) =>{
   }
   user.name = req.body.name;
   res.json(user);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56ee5d6... added index.js
 })
 //Display the information of specific User when you mention the id.
 app.get('/api/users:id', function(req, res){
