@@ -1,20 +1,20 @@
 $(document).ready(function () {
-  er = new EventRecommender();
-  let newUser = new User('Tom', 'cf61b');
-  let newUser2 = new User('Sally', '996a0');
-  let newUser3 = new User('Polly', '569a1');
-  er.addUser(newUser);
-  er.addUser(newUser2);
-  er.addUser(newUser3);
-  let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-  let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-  let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-  er.addEvent(e);
-  er.addEvent(e2);
-  er.addEvent(e3);
-  er.saveUserEvent(newUser3, e);
-  er.saveUserEvent(newUser3, e2);
-  er.saveUserEvent(newUser2, e3);
+  // er = new EventRecommender();
+  // let newUser = new User('Tom', 'cf61b');
+  // let newUser2 = new User('Sally', '996a0');
+  // let newUser3 = new User('Polly', '569a1');
+  // er.addUser(newUser);
+  // er.addUser(newUser2);
+  // er.addUser(newUser3);
+  // let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
+  // let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
+  // let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
+  // er.addEvent(e);
+  // er.addEvent(e2);
+  // er.addEvent(e3);
+  // er.saveUserEvent(newUser3, e);
+  // er.saveUserEvent(newUser3, e2);
+  // er.saveUserEvent(newUser2, e3);
   //search using jquery
   // $('#keyword-search').submit(function(event){
   //   event.preventDefault();

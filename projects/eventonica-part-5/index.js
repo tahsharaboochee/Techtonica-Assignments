@@ -2,26 +2,18 @@
 // //thus to access the class must do new eventRecommender.EventRecommender
 let eventRecommender = require('./eventonica.js')
 er = new eventRecommender.EventRecommender();
-
+// //Give data to the server
+er.addUser({'name':'Tom','userId':'cf61b'});
+er.addUser({'name':'Sally','userId':'996a0'});
+er.addUser({'Polly':'Tom','userId':'569a1'});
+er.addEvent({"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
+er.addEvent({"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
+er.addEvent({"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
+er.saveUserEvent({'name':'Tom','userId':'cf61b'}, {"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
+er.saveUserEvent({'name':'Sally','userId':'996a0'}, {"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
+er.saveUserEvent({'Polly':'Tom','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
 //es6 way of importing
 // import {EventRecommender} from './eventonica.js';// to get er class let er = new EventRecommender();
-
-//Give data to the server
-const users = [
-  {name: 'Tom', id: 'cf61b'},
-  {name: 'Sally', id: '996a0'},
-  {name:'Polly', id: '569a1'}
-]
-const events = [
-  {name: 'Beach Volley Ball', category: 'sport', date: new Date('2020-04-15')},
-  {name: 'Factorials!', category: 'Math', date: new Date('2020-02-17')},
-  {name: 'War and Peace', category: 'reading', date: new Date('2020-03-23')}
-]
-const userEvents = {
-  'cf61b':[{name: 'Beach Volley Ball', category: 'sport', date: new Date('2020-04-15')}],
-  '996a0':[{name: 'Factorials!', category: 'Math', date: new Date('2020-02-17')}],
-  '569a1':[{name: 'War and Peace', category: 'reading', date: new Date('2020-03-23')}]
-}
 
 // let mysql   = require('mysql'); //mysql is a database es5 way of importing mysql
 //express is a web application framework for Node
@@ -30,6 +22,7 @@ const Joi = require('joi');
 // import express from 'express'//es6 way of importing express
 let express = require('express'); //es5 way of importing express
 let app = express();
+
 app.use(express.json()); // to use the json file
 // import bodyParser from 'body-parser'; //body parser parses the json that is sent via request/post and allows it to be manipulated via javascript
 let bodyParser = require('body-parser');//Es5 way of importing body Parser 
@@ -45,9 +38,11 @@ app.get('/', function (req, res) {
   res.sendFile('/index.html', {root: __dirname});
 })
 //Display the list of Users when URL consist of eventRecommender users
+//working
 app.get('/api/users', function(req, res){
-  res.send(users);// send user infomation
+  res.send(er.users);// send user infomation
 })
+//working
 app.post('/api/users', (req, res) =>{
   //validate 
   const schema = {
@@ -68,33 +63,33 @@ app.post('/api/users', (req, res) =>{
   users.push(user);
   res.json(user);
 })
-app.put('/api/userEvents/:id', (req, res) =>{
-  const user = users.find(u => u.id === req.params.id);//checks
-  //if there is no valid user ID, then display an error with the following message
-  if(!user) res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
- // const result = validateUser(req.body); if(result.error)
-  //object destructuring 
-  const {error} = validateUser(req.body);
-  if (error){
-    //400 bad request
-    res.status(400).send('Name is required and should be minimum 3 characters');// or send (error.details[0].message);
-    return;
-  }
-  user.name = req.body.name;
-  res.json(user);
-<<<<<<< HEAD
 
-=======
->>>>>>> 56ee5d6... added index.js
-})
 //Display the information of specific User when you mention the id.
+//not working
 app.get('/api/users:id', function(req, res){
-  const user = users.find(u => u.id === req.params.id);//checks
-  console.log(user)
+  const id = req.params.id.slice(1); 
+  console.log("inside the get endpoint for user id:", 'reqId:', id, typeof reqId);
+  const user = er.findUser(id);//checks
+  // console.log(user)
+  // console.log(user)
+ 
+  res.json(user);// send user infomation
+})
+
+//not working
+app.put('/api/userEvents', (req, res) =>{
+  // console.log('app.put reqBody:', req.body.user);
+  // console.log("app.put eventId:", req.body.event)
+  const user = er.findUser(req.body.user['userId']);//checks
+  const event = er.findUser(req.body.event['eventId']);//checks
   //if there is no valid user ID, then display an error with the following message
-  if(!user) res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
-  
-  res.send(user);// send user infomation
+  if(user && event) {
+    res.status(200).send('<h2 style="font-family: Malgun Gothic; color green;">Saved event!</h2>')
+  }
+  {
+    res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
+  }
+  er.saveUserEvent(user.userId, event.eventId);
 })
 
 function validateUser(user){
@@ -104,10 +99,11 @@ function validateUser(user){
   return Joi.validate(user, schema);
 }
 //PORT environment variable
-const port = process.env.PORT || 3000; //process environment
+const port = process.env.PORT || 8080; //process environment
 app.listen(port, () => console.log(`Listening on port ${port}`));
 // let server = app.listen(3000, function () {
 //   let host = server.address().address;
 //   let port = server.address().port;
 //   console.log('your app is running at http://%s:%s', host, port);
 // });
+
