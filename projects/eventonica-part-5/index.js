@@ -72,20 +72,32 @@ app.get('/api/users:id', function(req, res){
   const user = er.findUser(id);//checks
   res.json(user);// send user infomation
 })
-//working
+
+//delete user
+app.delete('/api/users:id', function(req, res){
+  const id = req.params.id.slice(1); 
+  // console.log('id:', id)
+  const user = er.findUser(id)
+  if(user){
+    er.deleteUser(id);
+    res.status(200).send(`${user.name} has been deleted from the users`)
+  }else{
+    res.status(400).send('error user has not been deleted')
+  }
+})
+
 app.get('/api/events', function(req, res){
   res.send(er.events);// send user infomation
 })
 // working
 app.post('/api/events', (req, res) =>{
-console.log('app.post before const event: name:', req.body.name, 'eventId:', req.body.eventId, 'category:', req.body.category, 'entire body: ', req.body)
   const event = {
     name: req.body.name,
     eventId: req.body.eventId || Math.random().toString(16).substr(2, 5),
     category: req.body.category, 
     date: req.body.date
   };
-  console.log('app.post', event.eventId)
+
   if(er.findEvent(event.eventId) === "Invalid event"){
     er.addEvent(event);
   } else {
@@ -97,19 +109,27 @@ console.log('app.post before const event: name:', req.body.name, 'eventId:', req
 //Display the information of specific event when you mention the id.
 // working
 app.get('/api/events:id', function(req, res){
-  console.log('inside app.get api/events:id:', req.params.id)
   const id = parseInt(req.params.id.slice(1)); 
-  // console.log(app.get events:id)
-  // console.log("inside the get endpoint for event id:", 'reqId:', id, typeof reqId);
   const event = er.findEvent(id);//checks
  
   res.json(event);// send user infomation
 })
 
+//delete event
+app.delete('/api/events:id', function(req, res){
+  const id = parseInt(req.params.id.slice(1)); 
+  // console.log('id:', id)
+  const event = er.findEvent(id)
+  if(event){
+    er.deleteEvent(id);
+    res.status(200).send(`${event.name} has been deleted from events`)
+  }else{
+    res.status(400).send('error event has not been deleted')
+  }
+})
+
 // edit this for events working
 app.put('/api/userEvents', (req, res) =>{
-  // console.log('app.put reqBody:', req.body.user);
-  // console.log("app.put eventId:", req.body.event)
   const user = er.findUser(req.body.user['userId']);//checks
   const event = er.findUser(req.body.event['eventId']);//checks
   //if there is no valid user ID, then display an error with the following message
