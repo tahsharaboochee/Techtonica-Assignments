@@ -5,13 +5,13 @@ er = new eventRecommender.EventRecommender();
 // //Give data to the server
 er.addUser({'name':'Tom','userId':'cf61b'});
 er.addUser({'name':'Sally','userId':'996a0'});
-er.addUser({'Polly':'Tom','userId':'569a1'});
+er.addUser({'name':'Polly','userId':'569a1'});
 er.addEvent({"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
 er.addEvent({"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
 er.addEvent({"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
 er.saveUserEvent({'name':'Tom','userId':'cf61b'}, {"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
 er.saveUserEvent({'name':'Sally','userId':'996a0'}, {"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
-er.saveUserEvent({'Polly':'Tom','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
+er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
 //es6 way of importing
 // import {EventRecommender} from './eventonica.js';// to get er class let er = new EventRecommender();
 
@@ -58,25 +58,55 @@ app.post('/api/users', (req, res) =>{
   }
   const user = {
     name: req.body.name,
-    id: Math.random().toString(16).substr(2, 5)
+    userId: Math.random().toString(16).substr(2, 5),
   };
-  users.push(user);
+  er.addUser(user);
   res.json(user);
 })
 
 //Display the information of specific User when you mention the id.
-//not working
+// working
 app.get('/api/users:id', function(req, res){
   const id = req.params.id.slice(1); 
-  console.log("inside the get endpoint for user id:", 'reqId:', id, typeof reqId);
+  // console.log('id:', id)
   const user = er.findUser(id);//checks
-  // console.log(user)
-  // console.log(user)
- 
   res.json(user);// send user infomation
 })
+//working
+app.get('/api/events', function(req, res){
+  res.send(er.events);// send user infomation
+})
+// working
+app.post('/api/events', (req, res) =>{
+console.log('app.post before const event: name:', req.body.name, 'eventId:', req.body.eventId, 'category:', req.body.category, 'entire body: ', req.body)
+  const event = {
+    name: req.body.name,
+    eventId: req.body.eventId || Math.random().toString(16).substr(2, 5),
+    category: req.body.category, 
+    date: req.body.date
+  };
+  console.log('app.post', event.eventId)
+  if(er.findEvent(event.eventId) === "Invalid event"){
+    er.addEvent(event);
+  } else {
+    res.status(400).send('event already exist!')
+  }
+  res.json(event);
+})
 
-//not working
+//Display the information of specific event when you mention the id.
+// working
+app.get('/api/events:id', function(req, res){
+  console.log('inside app.get api/events:id:', req.params.id)
+  const id = parseInt(req.params.id.slice(1)); 
+  // console.log(app.get events:id)
+  // console.log("inside the get endpoint for event id:", 'reqId:', id, typeof reqId);
+  const event = er.findEvent(id);//checks
+ 
+  res.json(event);// send user infomation
+})
+
+// edit this for events working
 app.put('/api/userEvents', (req, res) =>{
   // console.log('app.put reqBody:', req.body.user);
   // console.log("app.put eventId:", req.body.event)
@@ -99,7 +129,7 @@ function validateUser(user){
   return Joi.validate(user, schema);
 }
 //PORT environment variable
-const port = process.env.PORT || 8080; //process environment
+const port = process.env.PORT || 3000; //process environment
 app.listen(port, () => console.log(`Listening on port ${port}`));
 // let server = app.listen(3000, function () {
 //   let host = server.address().address;

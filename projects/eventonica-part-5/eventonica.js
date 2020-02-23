@@ -139,10 +139,13 @@ findEventsbyCategory(category) {
 }
 
   findEvent(eventId){
+    console.log('inside findEvent: this.events:', this.events, 'eventId:', eventId)
     for(let key in this.events){
       let curEvent = this.events[key].eventId
+      console.log('inside findEvent for in loop: curEvent:', curEvent, 'eventId:', eventId)
       //returns an obj
       if (curEvent === eventId){
+        console.log('parameters met curEvent === eventId')
         return this.events[key];
       } 
     }
