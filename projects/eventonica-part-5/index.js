@@ -9,9 +9,11 @@ er.addUser({'name':'Polly','userId':'569a1'});
 er.addEvent({"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
 er.addEvent({"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
 er.addEvent({"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
+er.addEvent( {"name":'Techtonia', "eventId": 4, "category":'example', "date":'2020-04-15'});
 er.saveUserEvent({'name':'Tom','userId':'cf61b'}, {"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
 er.saveUserEvent({'name':'Sally','userId':'996a0'}, {"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
 er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
+er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Techtonia', "eventId": 4, "category":'example', "date":'2020-04-15'});
 //es6 way of importing
 // import {EventRecommender} from './eventonica.js';// to get er class let er = new EventRecommender();
 
@@ -86,14 +88,16 @@ app.delete('/api/users:id', function(req, res){
   }
 })
 
+//display events
 app.get('/api/events', function(req, res){
   res.send(er.events);// send user infomation
 })
-// working
+
+//create event
 app.post('/api/events', (req, res) =>{
   const event = {
     name: req.body.name,
-    eventId: req.body.eventId || Math.random().toString(16).substr(2, 5),
+    eventId: req.body.eventId ||  Math.floor(Math.pow(10, 5) + Math.random() * (Math.pow(10, 6) - Math.pow(10, 5) - 1)),//random 6 digit number
     category: req.body.category, 
     date: req.body.date
   };
@@ -107,7 +111,6 @@ app.post('/api/events', (req, res) =>{
 })
 
 //Display the information of specific event when you mention the id.
-// working
 app.get('/api/events:id', function(req, res){
   const id = parseInt(req.params.id.slice(1)); 
   const event = er.findEvent(id);//checks
@@ -115,20 +118,23 @@ app.get('/api/events:id', function(req, res){
   res.json(event);// send user infomation
 })
 
-//delete event
+//delete event by id
 app.delete('/api/events:id', function(req, res){
-  const id = parseInt(req.params.id.slice(1)); 
+  const eventId = parseInt(req.params.id.slice(1)); 
   // console.log('id:', id)
-  const event = er.findEvent(id)
+  const event = er.findEvent(eventId)
   if(event){
-    er.deleteEvent(id);
+    er.deleteEvent(eventId);
     res.status(200).send(`${event.name} has been deleted from events`)
   }else{
     res.status(400).send('error event has not been deleted')
   }
 })
-
-// edit this for events working
+//display userEvents
+app.get('/api/userEvents', (req, res) =>{
+  res.send(er.personalEvents);// send user infomation
+})
+//edit userEvents
 app.put('/api/userEvents', (req, res) =>{
   const user = er.findUser(req.body.user['userId']);//checks
   const event = er.findUser(req.body.event['eventId']);//checks
@@ -141,6 +147,7 @@ app.put('/api/userEvents', (req, res) =>{
   }
   er.saveUserEvent(user.userId, event.eventId);
 })
+// edit saved events for user
 
 function validateUser(user){
   const schema = {

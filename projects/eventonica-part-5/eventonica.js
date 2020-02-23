@@ -101,6 +101,7 @@ class EventRecommender {
         this.users.splice(i, 1);
       }
     });
+    delete this.personalEvents[id];//delete user from personal events
   }
 
   deleteEvent(id) {
@@ -108,6 +109,15 @@ class EventRecommender {
     if (this.events.length === 0) return "there are currently no events to delete";
     this.events.forEach((obj, i) => {
       if (obj['eventId'] === id) {
+        //delete event from user events
+        for(let user in this.personalEvents){
+          for (let i = 0; i <  this.personalEvents[user].length; i++){
+            if(this.personalEvents[user][i].eventId === id){
+              let userArr = this.personalEvents[user];
+              userArr.splice(i, 1);
+            }
+          }
+        }
         this.events.splice(i, 1);
       }
     });
