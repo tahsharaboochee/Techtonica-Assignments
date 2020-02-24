@@ -1,77 +1,53 @@
 $(document).ready(function () {
-  // er = new EventRecommender();
-  // let newUser = new User('Tom', 'cf61b');
-  // let newUser2 = new User('Sally', '996a0');
-  // let newUser3 = new User('Polly', '569a1');
-  // er.addUser(newUser);
-  // er.addUser(newUser2);
-  // er.addUser(newUser3);
-  // let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-  // let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-  // let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-  // er.addEvent(e);
-  // er.addEvent(e2);
-  // er.addEvent(e3);
-  // er.saveUserEvent(newUser3, e);
-  // er.saveUserEvent(newUser3, e2);
-  // er.saveUserEvent(newUser2, e3);
-  //search using jquery
-  // $('#keyword-search').submit(function(event){
-  //   event.preventDefault();
-  //   let userInfo = $('#keyword-search-value').val();
-  //   $('#keyword-search')[0].reset();
-  // });
-  //beginning process of using jquery to call API
-  // $.ajax({
-  //   type:"GET",
-  //   url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
-  //   async:true,
-  //   dataType: "json",
-  //   success: function(json) {
-  //               console.log(json);
-  //               // Parse the response.
-  //               // Do other things.
-  //            },
-  //   error: function(xhr, status, err) {
-  //               // This time, we do not end up here!
-  //            }
-  // });
-
+  let requestSent = false;
   function displayUser() {
-    $.ajax({
-      type: 'GET',// GET is the default 
-      url: '/api/users',
-      //get user and display on page
-      success: function(users){
-        $.each(users, function(i, user){
-          // console.log(user)
-          $("#all-users").append(`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
-        });
-      }
-    })
+    if(!requestSent){
+      requestSent = true;
+      $.ajax({
+        type: 'GET',// GET is the default 
+        url: '/api/users',
+        //get user and display on page
+        success: function(users){
+          $.each(users, function(i, user){
+            // console.log(user)
+            $("#all-users").append(`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
+          });
+        },
+        error: function(){
+          alert('error displaying users');
+          requestSent = false;
+        }
+      })
+    }
   }
   displayUser();
 
-  // function dateFormatter(date) {
-  //   date = new Date(date);
-  //   let day = date.getDate();
-  //   let month = date.getMonth() + 1;
-  //   let year = date.getFullYear();
-  //   return `Date:${month}/${day}/${year}`
-  // }
-
   // // Use jQuery to make it so that when someone fills out the form and presses 
   // // "Submit", a new user is created and added to the EventRecommender users array.
-  // $('#add-user').submit(function (event) {
-  //   event.preventDefault();
-  //   let id = $("#add-user").find('#add-user-id').val();
-  //   let name = $("#add-user").find('#add-user-name').val();
-  //   let nU = new User(name, id);
-  //   $.ajax('/user')
-  //   er.addUser(nU);
-  //   displayUser();
-  //   $('#add-user')[0].reset();
-  // });
+  $('#add-user').submit(function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let user = { 
+      name: $("#add-user").find('#add-user-name').val(),
+      userId: $("#add-user").find('#add-user-id').val()
+    }
+    // console.log('add-user name:', name, 'id:', id);
+    $.ajax({
+      url: '/api/users',
+      type: 'POST',
+      data: user,
+      success: function(newUser){
+        console.log('success info:', newUser)
+        $("#all-users").append(`<li> Name: ${newUser.name} User Id: ${newUser.userId}</li>`);
+      },
+      error: function(){
+        alert('error adding a new user');
+      }
+    })
+    // er.addUser(nU);
+    displayUser();
+    $('#add-user')[0].reset();
+  });
 
   // $('#delete-user').submit(function (e) {
   //   e.preventDefault();
@@ -114,6 +90,14 @@ $(document).ready(function () {
   //   $('#delete-event')[0].reset();
   // });
 
+  //date formatter
+  // function dateFormatter(date) {
+  //   date = new Date(date);
+  //   let day = date.getDate();
+  //   let month = date.getMonth() + 1;
+  //   let year = date.getFullYear();
+  //   return `Date:${month}/${day}/${year}`
+  // }
 
   // $('#date-search').submit(function (e) {
   //   e.preventDefault();
@@ -152,6 +136,23 @@ $(document).ready(function () {
   // });
 
 });
+
+  //beginning process of using jquery to call API
+  // $.ajax({
+  //   type:"GET",
+  //   url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
+  //   async:true,
+  //   dataType: "json",
+  //   success: function(json) {
+  //               console.log(json);
+  //               // Parse the response.
+  //               // Do other things.
+  //            },
+  //   error: function(xhr, status, err) {
+  //               // This time, we do not end up here!
+  //            }
+  // });
+
 
 //below i put the hard coded data in an if statement so the local storage wouldn't duplicate the local storage. 
 //   er = new EventRecommender();

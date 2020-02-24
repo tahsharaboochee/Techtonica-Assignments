@@ -1,6 +1,6 @@
 //es5 way of importing: we are creating a new variable called eventRecommender that has a object with all of the exported items from eventonica.js 
 // //thus to access the class must do new eventRecommender.EventRecommender
-let eventRecommender = require('./eventonica.js')
+let eventRecommender = require('/Users/tahsharaboochee/codingPractice/techtonica/assignments/projects/eventonica-part-5/public/eventonica.js')
 er = new eventRecommender.EventRecommender();
 // //Give data to the server
 er.addUser({'name':'Tom','userId':'cf61b'});
@@ -34,9 +34,9 @@ app.use(bodyParser.urlencoded({extended: true})); //use when not using ajax i.e.
 /*application settings i.e. setting the views folder and static folders*/
 //any request that comes from the document or ajax request we will look inside the directory
 app.use(express.static('public'));
+
 //get the file and send it to the server
 app.get('/', function (req, res) {
-
   res.sendFile('/index.html', {root: __dirname});
 })
 //Display the list of Users when URL consist of eventRecommender users
@@ -47,20 +47,20 @@ app.get('/api/users', function(req, res){
 //working
 app.post('/api/users', (req, res) =>{
   //validate 
-  const schema = {
-    name: Joi.string().min(3).required()
-  }
+  console.log('app.post req: ', req);
+  // const schema = {
+  //   name: Joi.string().min(3).required()
+  // }
 
-  const {error} = validateUser(req.body);
-  if (error){
-    //400 bad request
-    res.status(400).send('Name is required and should be minimum 3 characters');
-    console.log(error.details[0].message);
-    return;
-  }
+  // const {error} = validateUser(req.body);
+  // if (error){
+  //   //400 bad request
+  //   res.status(400).send('Name is required and should be minimum 3 characters');// console.log(error.details[0].message);
+  //   return;
+  // }
   const user = {
     name: req.body.name,
-    userId: Math.random().toString(16).substr(2, 5),
+    userId: req.body.userId || Math.random().toString(16).substr(2, 5),
   };
   er.addUser(user);
   res.json(user);
