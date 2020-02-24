@@ -46,18 +46,6 @@ app.get('/api/users', function(req, res){
 })
 //working
 app.post('/api/users', (req, res) =>{
-  //validate 
-  console.log('app.post req: ', req);
-  // const schema = {
-  //   name: Joi.string().min(3).required()
-  // }
-
-  // const {error} = validateUser(req.body);
-  // if (error){
-  //   //400 bad request
-  //   res.status(400).send('Name is required and should be minimum 3 characters');// console.log(error.details[0].message);
-  //   return;
-  // }
   const user = {
     name: req.body.name,
     userId: req.body.userId || Math.random().toString(16).substr(2, 5),
@@ -68,16 +56,15 @@ app.post('/api/users', (req, res) =>{
 
 //Display the information of specific User when you mention the id.
 // working
-app.get('/api/users:id', function(req, res){
-  const id = req.params.id.slice(1); 
-  // console.log('id:', id)
+app.get('/api/users/:id', function(req, res){
+  const id = req.params.id; 
   const user = er.findUser(id);//checks
   res.json(user);// send user infomation
 })
 
 //delete user
-app.delete('/api/users:id', function(req, res){
-  const id = req.params.id.slice(1); 
+app.delete('/api/users/:id', function(req, res){
+  const id = req.params.id; 
   // console.log('id:', id)
   const user = er.findUser(id)
   if(user){
@@ -94,8 +81,8 @@ app.get('/api/events', function(req, res){
 })
 
 //display events by category
-app.get('/api/events-by-category:category', function(req, res){
-  let category = req.params.category.slice(1); 
+app.get('/api/events-by-category/:category', function(req, res){
+  let category = req.params.category; 
   console.log('events-by-category app.get:', 'category', category)
   category = er.findEventsbyCategory(category)
   if(category.length > 0){
@@ -106,8 +93,8 @@ app.get('/api/events-by-category:category', function(req, res){
 })
 
 //display events by date
-app.get('/api/events-by-date:eventDate', function(req, res){
-  let date = req.params.eventDate.slice(1); 
+app.get('/api/events-by-date/:eventDate', function(req, res){
+  let date = req.params.eventDate; 
   console.log('events-by-date app.get:', 'date', date)
   date = er.findEventsByDate(date)
   if(date.length > 0){
@@ -116,8 +103,6 @@ app.get('/api/events-by-date:eventDate', function(req, res){
     res.status(400).send('no events for this date')
   }
 })
-
-
 //create event
 app.post('/api/events', (req, res) =>{
   const event = {
@@ -136,16 +121,16 @@ app.post('/api/events', (req, res) =>{
 })
 
 //Display the information of specific event when you mention the id.
-app.get('/api/events:id', function(req, res){
-  const id = parseInt(req.params.id.slice(1)); 
+app.get('/api/events/:id', function(req, res){
+  const id = parseInt(req.params.id); 
   const event = er.findEvent(id);//checks
  
   res.json(event);// send user infomation
 })
 
 //delete event by id
-app.delete('/api/events:id', function(req, res){
-  const eventId = parseInt(req.params.id.slice(1)); 
+app.delete('/api/events/:id', function(req, res){
+  const eventId = parseInt(req.params.id); 
   // console.log('id:', id)
   const event = er.findEvent(eventId)
   if(event){
@@ -159,27 +144,21 @@ app.delete('/api/events:id', function(req, res){
 app.get('/api/userEvents', (req, res) =>{
   res.send(er.personalEvents);// send user infomation
 })
-//edit userEvents
+
+// edit saved events for user
 app.put('/api/userEvents', (req, res) =>{
   const user = er.findUser(req.body.user['userId']);//checks
-  const event = er.findUser(req.body.event['eventId']);//checks
+  const event = er.findEvent(req.body.event['eventId']);//checks
   //if there is no valid user ID, then display an error with the following message
   if(user && event) {
+    er.saveUserEvent(user.userId, event.eventId);
     res.status(200).send('<h2 style="font-family: Malgun Gothic; color green;">Saved event!</h2>')
   }
   {
     res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
   }
-  er.saveUserEvent(user.userId, event.eventId);
 })
-// edit saved events for user
 
-function validateUser(user){
-  const schema = {
-    name: Joi.string().min(3).required()
-  }
-  return Joi.validate(user, schema);
-}
 //PORT environment variable
 const port = process.env.PORT || 3000; //process environment
 app.listen(port, () => console.log(`Listening on port ${port}`));

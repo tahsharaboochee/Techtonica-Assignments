@@ -1,4 +1,9 @@
+import { localeData } from "moment";
+
 $(document).ready(function () {
+  function userInfo(user){
+    $("#all-users").append(`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
+  }
   let requestSent = false;
   function displayUser() {
     if(!requestSent){
@@ -9,8 +14,7 @@ $(document).ready(function () {
         //get user and display on page
         success: function(users){
           $.each(users, function(i, user){
-            // console.log(user)
-            $("#all-users").append(`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
+            userInfo(user)
           });
         },
         error: function(){
@@ -22,173 +26,193 @@ $(document).ready(function () {
   }
   displayUser();
 
-  // // Use jQuery to make it so that when someone fills out the form and presses 
-  // // "Submit", a new user is created and added to the EventRecommender users array.
+  // Use jQuery to make it so that when someone fills out the form and presses 
+  // "Submit", a new user is created and added to the EventRecommender users array.
   $('#add-user').submit(function (event) {
     event.preventDefault();
     event.stopPropagation();
-    let user = { 
+    const user = { 
       name: $("#add-user").find('#add-user-name').val(),
       userId: $("#add-user").find('#add-user-id').val()
     }
-    // console.log('add-user name:', name, 'id:', id);
     $.ajax({
       url: '/api/users',
       type: 'POST',
       data: user,
       success: function(newUser){
-        console.log('success info:', newUser)
-        $("#all-users").append(`<li> Name: ${newUser.name} User Id: ${newUser.userId}</li>`);
+        userInfo(newUser);
       },
       error: function(){
         alert('error adding a new user');
       }
     })
-    // er.addUser(nU);
     displayUser();
     $('#add-user')[0].reset();
   });
 
-  // $('#delete-user').submit(function (e) {
-  //   e.preventDefault();
-  //   let id = $("#delete-user").find('#delete-user-id').val();
-  //   //make an api call with type DELETE
-  //   er.deleteUser(id);
-  //   displayUser();
-  //   $('#delete-user')[0].reset();
-  // });
+  $('#delete-user').submit(function (e) {
+    e.preventDefault();
+    const user = { 
+      // name: $("#add-user").find('#add-user-name').val(),
+      userId: $("#delete-user").find('#delete-user-id').val()
+    }
+    let id = $("#delete-user").find('#delete-user-id').val();
+    // console.log('id:', id, typeof id)
+    //make an api call with type DELETE
+    $.ajax({
+      url: `/api/users/${id}`,
+      method: 'DELETE',
+      data: id,
+      success: function(data){
+        console.log('ajax delete succesS:', data);
+        location.reload();
+      },
+      error: function (data){
+        alert('error:', data);
+      }
 
-  // function displayEvent() {
-  //   let eventInfo = '';
-  //   for (let event of er.events) {
-  //     eventInfo += (`<li> Event: '${event.title}'<br>${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-  //   };
-  //   $("#all-events").html(eventInfo);
-  // }
-  // displayEvent();
+    })
+    displayUser();
+    $('#delete-user')[0].reset();
+  });
 
-  // $('#add-event').submit(function (e) {
-  //   e.preventDefault();
-  //   let name = $("#add-event").find('#add-event-name').val();
-  //   let eCategory = $("#add-event").find('#add-event-category').val();
-  //   let eDate = $("#add-event").find('#add-event-date').val();
-  //   let id = $("#add-event").find('#add-event-id').val();
+  function eventInfo(event){
+    $("#all-events").append(`<li> Event: '${event.name}'<br>${dateFormatter(event.date)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+  }
+  let requestEvents = false;
+  function displayEvent() {
+    if(!requestEvents){
+      requestEvents = true;
+      $.ajax({
+        type: 'GET',// GET is the default 
+        url: '/api/events',
+        //get event and display on page
+        success: function(events){
+          console.log('success:', events)
+          $.each(events, function(i, event){
+            // console.log('api/events ajax:', event)
+            eventInfo(event);
+          });
+        },
+        error: function(){
+          alert('error displaying events');
+          requestEvents = false;
+        }
+      })
+    }
+  }
+displayEvent();
 
-  //   // debugger;
+  $('#add-event').submit(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const event = { 
+      name: $("#add-event").find('#add-event-name').val(),
+      eventId: $("#add-event").find('#add-event-id').val(),
+      category: $("#add-event").find('#add-event-category').val(),
+      date: $("#add-event").find('#add-event-date').val()
+    }
+    $.ajax({
+      url: '/api/events',
+      type: 'POST',
+      data: event,
+      success: function(newEvent){
+        eventInfo(newEvent);
+      },
+      error: function(){
+        alert('error adding a new event');
+      }
+    })
+    displayEvent();
+    $('#add-event')[0].reset();
+  });
 
-  //   let nE = new Event(name, eCategory, eDate, id);
-  //   er.addEvent(nE);
-  //   displayEvent();
-  //   $('#add-event')[0].reset();
-  // });
+  $('#delete-event').submit(function (e) {
+    e.preventDefault();
+    const event = { 
+      eventId: $("#delete-user").find('#delete-user-id').val()
+    }
+    let id = $("#delete-event").find('#delete-event-id').val();
+    $.ajax({
+      url: `/api/users/${id}`,
+      method: 'DELETE',
+      data: id,
+      success: function(data){
+        console.log('ajax delete success:', data);
+        location.reload();
+      },
+      error: function (data){
+        alert('error:', data);
+      }
+    })
+    displayEvent();
+    $('#delete-event')[0].reset();
+  });
 
-  // $('#delete-event').submit(function (e) {
-  //   e.preventDefault();
-  //   let id = $("#delete-event").find('#delete-event-id').val();
-  //   er.deleteEvent(id);
-  //   displayEvent();
-  //   $('#delete-event')[0].reset();
-  // });
+  // date formatter
+  function dateFormatter(date) {
+    // console.log('inside date Formatter', date)
+    date = new Date(date);
+    let day = date.getUTCDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return `Date:${month}/${day}/${year}`
+  }
 
-  //date formatter
-  // function dateFormatter(date) {
-  //   date = new Date(date);
-  //   let day = date.getDate();
-  //   let month = date.getMonth() + 1;
-  //   let year = date.getFullYear();
-  //   return `Date:${month}/${day}/${year}`
-  // }
+  $('#date-search').submit(function (e) {
+    e.preventDefault();
+    let edate = new Date($("#date-search").find('#date-search-id').val());
+        $.ajax({
+          type: 'GET',
+          url: '/api/events/${date}',
+          data: edate, 
+          success: function(events){
+            $.each(events, function(i, event){
+              // console.log('api/events ajax:', event)
+              $("#search-results").append(`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+            });
+          },
+          error: function(){
+            alert('No Events for this date');
+          }
+        })
+    $('#date-search')[0].reset();
+  });
 
-  // $('#date-search').submit(function (e) {
-  //   e.preventDefault();
-  //   let edate = new Date($("#date-search").find('#date-search-id').val());
-  //   let results = er.findEventsByDate(edate);
-  //   for (let event of results) {
-  //     let eventInfo = '';
-  //     //console.log('jquery date-search:', event.title, dateFormatter(date), event.category, event.eventId)
-  //     eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-  //     $("#search-results").html(eventInfo);
-  //   }
-  //   $('#date-search')[0].reset();
-  // });
+  $('#category-search').submit(function (e) {
+    e.preventDefault();
+    let cat = $("#category-search").find('#category-search-id').val();
+    $.ajax({
+      type: 'GET',
+      url: '/api/events/${category}',
+      data: cat, 
+      success: function(events){
+        $.each(events, function(i, event){
+          $("#category-search-results").append(`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+        });
+      },
+      error: function(){
+        alert('No Events in this category');
+      }
+    })
 
-  // $('#category-search').submit(function (e) {
-  //   e.preventDefault();
-  //   let cat = $("#category-search").find('#category-search-id').val();
-  //   let results = er.findEventsbyCategory(cat);
+    $('#category-search')[0].reset();
+  });
 
-  //   for (let event of results) {
-  //     let eventInfo = '';
-  //     eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-  //     $("#category-search-results").html(eventInfo);
-  //   }
-  //   $('#category-search')[0].reset();
-  // });
-
-  // $('#save-user-event').submit(function (e) {
-  //   e.preventDefault();
-  //   let eId = $("#save-user-event").find('#save-event-id').val();
-  //   let uId = $("#save-user-event").find('#save-user-id').val();
-  //   let id = er.findUser(uId);
-  //   let event = er.findEvent(eId);
-  //   er.saveUserEvent(id, event);
-  //   $('#save-user-event')[0].reset();
-  // });
+  $('#save-user-event').submit(function (e) {
+    e.preventDefault();
+    let eId = $("#save-user-event").find('#save-event-id').val();
+    let uId = $("#save-user-event").find('#save-user-id').val();
+    $.ajax({
+      type: 'PUT',
+      url: '/api/userEvents',
+      data: {user: {userId: uId}, event: {eventId: eId}},
+      success: function(){
+        // console.log('saveEvents ajax:', userEvents)
+      }
+    })
+    er.saveUserEvent(id, event);
+    $('#save-user-event')[0].reset();
+  });
 
 });
-
-  //beginning process of using jquery to call API
-  // $.ajax({
-  //   type:"GET",
-  //   url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
-  //   async:true,
-  //   dataType: "json",
-  //   success: function(json) {
-  //               console.log(json);
-  //               // Parse the response.
-  //               // Do other things.
-  //            },
-  //   error: function(xhr, status, err) {
-  //               // This time, we do not end up here!
-  //            }
-  // });
-
-
-//below i put the hard coded data in an if statement so the local storage wouldn't duplicate the local storage. 
-//   er = new EventRecommender();
-//  let newUser = new User('Tom','cf61b');
-//  let newUser2 = new User('Sally','996a0');
-//  let newUser3 = new User('Polly','569a1');
-//  er.addUser(newUser);
-//  er.addUser(newUser2);
-//  er.addUser(newUser3);
-//  let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-//  let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-//  let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-//  er.addEvent(e);
-//  er.addEvent(e2);
-//  er.addEvent(e3);
-//  er.saveUserEvent(newUser3, e);
-//  er.saveUserEvent(newUser3, e2);
-//  er.saveUserEvent(newUser2, e3);
-// below is with local storage
-// let loaded = localStorage.getItem('loaded') ? JSON.parse(localStorage.getItem('loaded')) : false;
-// if (!loaded){
-//   let newUser = new User('Tom','cf61b');
-//   let newUser2 = new User('Sally','996a0');
-//   let newUser3 = new User('Polly','569a1');
-//   er.addUser(newUser);
-//   er.addUser(newUser2);
-//   er.addUser(newUser3);
-
-//   let e = new Event('Beach Volley Ball', 'sport', new Date('2020-04-15'));
-//   let e2 = new Event('Factorials!', 'Math', new Date('2020-02-17'));
-//   let e3 = new Event('War and Peace', 'reading', new Date('2020-03-23'));
-//   er.addEvent(e);
-//   er.addEvent(e2);
-//   er.addEvent(e3);
-//   er.saveUserEvent(newUser3, e);
-//   er.saveUserEvent(newUser3, e2);
-//   er.saveUserEvent(newUser2, e3);
-//   loaded = localStorage.setItem("loaded", JSON.stringify(true));;
-// }
