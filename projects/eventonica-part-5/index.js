@@ -88,9 +88,21 @@ app.delete('/api/users:id', function(req, res){
   }
 })
 
-//display events
-app.get('/api/events-by-category', function(req, res){
+//display events 
+app.get('/api/events', function(req, res){
   res.send(er.events);// send user infomation
+})
+
+//display events by category
+app.get('/api/events-by-category:category', function(req, res){
+  let category = req.params.category.slice(1); 
+  console.log('events-by-category app.get:', 'category', category)
+  category = er.findEventsbyCategory(category)
+  if(category.length > 0){
+    res.status(200).send(category)
+  } else{
+    res.status(400).send('no events for this category')
+  }
 })
 
 //display events by date
@@ -98,24 +110,19 @@ app.get('/api/events-by-date:eventDate', function(req, res){
   let date = req.params.eventDate.slice(1); 
   console.log('events-by-date app.get:', 'date', date)
   date = er.findEventsByDate(date)
-  if(date){
+  if(date.length > 0){
     res.status(200).send(date)
   } else{
     res.status(400).send('no events for this date')
   }
-  // res.send(er.events);// send user infomation
 })
 
-//display events by category
-app.get('/api/events', function(req, res){
-  res.send(er.events);// send user infomation
-})
 
 //create event
 app.post('/api/events', (req, res) =>{
   const event = {
     name: req.body.name,
-    eventId: req.body.eventId ||  Math.floor(Math.pow(10, 5) + Math.random() * (Math.pow(10, 6) - Math.pow(10, 5) - 1)),//random 6 digit number
+    eventId: req.body.eventId || Math.floor(Math.pow(10, 5) + Math.random() * (Math.pow(10, 6) - Math.pow(10, 5) - 1)),//random 6 digit number
     category: req.body.category, 
     date: req.body.date
   };
