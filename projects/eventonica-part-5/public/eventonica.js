@@ -107,6 +107,7 @@ class EventRecommender {
   saveUserEvent(userObj, eventObj) {
     // Allow users to save events to a personal Events array.
     let curUserId = userObj.userId;
+    // console.log('in saveUserEvent eventonica.js eventObj:', eventObj, 'userObj: ', userObj)
     let cureventId = eventObj.eventId;
     let validUser = false;
     this.users.forEach((curUserObj) =>{
@@ -114,14 +115,20 @@ class EventRecommender {
         validUser = true;
       }
     });
-    if(!validUser){return "User does not exist! please, add user.";}
+    if(!validUser){
+      console.log("User does not exist! please, add user.")
+      return
+    };
     let validEvent = false;
     this.events.forEach((curEventObj) =>{
       if (cureventId === curEventObj.eventId){
         validEvent = true;
       }; 
     });
-    if(!validEvent){return "Event already saved! please, save a different event."};
+    if(!validEvent){
+      console.log("Event already saved! please, save a different event.");
+      return;
+    }
     for (let key in this.personalEvents){
       if (key === curUserId){
         this.personalEvents[curUserId].push(eventObj);

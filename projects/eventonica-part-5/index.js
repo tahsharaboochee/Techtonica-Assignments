@@ -149,12 +149,12 @@ app.get('/api/userEvents', (req, res) =>{
 app.put('/api/userEvents', (req, res) =>{
   const user = er.findUser(req.body.user['userId']);//checks
   const event = er.findEvent(req.body.event['eventId']);//checks
+  console.log('inside app.put for userEvents: user: ', user, 'event: ', event)
   //if there is no valid user ID, then display an error with the following message
   if(user && event) {
-    er.saveUserEvent(user.userId, event.eventId);
-    res.status(200).send('<h2 style="font-family: Malgun Gothic; color green;">Saved event!</h2>')
-  }
-  {
+    er.saveUserEvent(user, event);
+    res.status(200).send(`Successfully added the event, ${event}`)
+  } else {
     res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
   }
 })
