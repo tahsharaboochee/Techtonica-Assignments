@@ -89,6 +89,24 @@ app.delete('/api/users:id', function(req, res){
 })
 
 //display events
+app.get('/api/events-by-category', function(req, res){
+  res.send(er.events);// send user infomation
+})
+
+//display events by date
+app.get('/api/events-by-date:eventDate', function(req, res){
+  let date = req.params.eventDate.slice(1); 
+  console.log('events-by-date app.get:', 'date', date)
+  date = er.findEventsByDate(date)
+  if(date){
+    res.status(200).send(date)
+  } else{
+    res.status(400).send('no events for this date')
+  }
+  // res.send(er.events);// send user infomation
+})
+
+//display events by category
 app.get('/api/events', function(req, res){
   res.send(er.events);// send user infomation
 })

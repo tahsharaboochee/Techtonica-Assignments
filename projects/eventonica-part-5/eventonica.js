@@ -22,22 +22,6 @@ class EventRecommender {
     this.personalEvents = {};
   }
 
-  personalEventSaver(userId, eventId) {
-    if (this.users.includes(findUser(userId)) && this.events.includes(findEvent(eventId))){
-      let user = findUser(userId).userId;
-      let event = findEvent(eventId);
-      for (let curUser of this.personalEvents){
-        if (curUser === user){
-          curUser[userId].push(event);
-        }
-      };
-    } else {
-      return "invalid info";
-    }
-     
-  }
- 
-
   addEvent(eventObj) {
     // Adds a new Event to the System
     let cureventId = eventObj.eventId;
@@ -128,15 +112,18 @@ class EventRecommender {
     if (date instanceof Date === false) {
       date = new Date(date);
     }
-    
+
     let checkDates = (date1, date2) => {
       return date1.getDate() === date2.getDate() &&
         date1.getFullYear() === date2.getFullYear() &&
         date1.getMonth() === date2.getMonth()
+      return true;
     }
+
     return this.events.filter(function (obj) {
-      return checkDates(obj.eventDate, date);
+      return checkDates(new Date(obj['date']), date);
     });
+
   }
 // helper methods
 findEventsbyCategory(category) {
