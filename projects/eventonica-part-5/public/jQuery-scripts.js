@@ -38,112 +38,118 @@ $(document).ready(function () {
   // });
 
   function displayUser() {
-    let userInfo = '';
-    for (let user of er.users) {
-      userInfo += (`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
-    };
-    $("#all-users").html(userInfo);
+    $.ajax({
+      type: 'GET',// GET is the default 
+      url: '/api/users',
+      //get user and display on page
+      success: function(users){
+        $.each(users, function(i, user){
+          // console.log(user)
+          $("#all-users").append(`<li> Name: ${user.name} User Id: ${user.userId}</li>`);
+        });
+      }
+    })
   }
   displayUser();
 
-  function dateFormatter(date) {
-    date = new Date(date);
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    return `Date:${month}/${day}/${year}`
-  }
+  // function dateFormatter(date) {
+  //   date = new Date(date);
+  //   let day = date.getDate();
+  //   let month = date.getMonth() + 1;
+  //   let year = date.getFullYear();
+  //   return `Date:${month}/${day}/${year}`
+  // }
 
-  // Use jQuery to make it so that when someone fills out the form and presses 
-  // "Submit", a new user is created and added to the EventRecommender users array.
-  $('#add-user').submit(function (event) {
-    event.preventDefault();
-    let id = $("#add-user").find('#add-user-id').val();
-    let name = $("#add-user").find('#add-user-name').val();
-    let nU = new User(name, id);
-    $.ajax('/user')
-    er.addUser(nU);
-    displayUser();
-    $('#add-user')[0].reset();
-  });
+  // // Use jQuery to make it so that when someone fills out the form and presses 
+  // // "Submit", a new user is created and added to the EventRecommender users array.
+  // $('#add-user').submit(function (event) {
+  //   event.preventDefault();
+  //   let id = $("#add-user").find('#add-user-id').val();
+  //   let name = $("#add-user").find('#add-user-name').val();
+  //   let nU = new User(name, id);
+  //   $.ajax('/user')
+  //   er.addUser(nU);
+  //   displayUser();
+  //   $('#add-user')[0].reset();
+  // });
 
-  $('#delete-user').submit(function (e) {
-    e.preventDefault();
-    let id = $("#delete-user").find('#delete-user-id').val();
-    //make an api call with type DELETE
-    er.deleteUser(id);
-    displayUser();
-    $('#delete-user')[0].reset();
-  });
+  // $('#delete-user').submit(function (e) {
+  //   e.preventDefault();
+  //   let id = $("#delete-user").find('#delete-user-id').val();
+  //   //make an api call with type DELETE
+  //   er.deleteUser(id);
+  //   displayUser();
+  //   $('#delete-user')[0].reset();
+  // });
 
-  function displayEvent() {
-    let eventInfo = '';
-    for (let event of er.events) {
-      eventInfo += (`<li> Event: '${event.title}'<br>${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-    };
-    $("#all-events").html(eventInfo);
-  }
-  displayEvent();
+  // function displayEvent() {
+  //   let eventInfo = '';
+  //   for (let event of er.events) {
+  //     eventInfo += (`<li> Event: '${event.title}'<br>${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+  //   };
+  //   $("#all-events").html(eventInfo);
+  // }
+  // displayEvent();
 
-  $('#add-event').submit(function (e) {
-    e.preventDefault();
-    let name = $("#add-event").find('#add-event-name').val();
-    let eCategory = $("#add-event").find('#add-event-category').val();
-    let eDate = $("#add-event").find('#add-event-date').val();
-    let id = $("#add-event").find('#add-event-id').val();
+  // $('#add-event').submit(function (e) {
+  //   e.preventDefault();
+  //   let name = $("#add-event").find('#add-event-name').val();
+  //   let eCategory = $("#add-event").find('#add-event-category').val();
+  //   let eDate = $("#add-event").find('#add-event-date').val();
+  //   let id = $("#add-event").find('#add-event-id').val();
 
-    // debugger;
+  //   // debugger;
 
-    let nE = new Event(name, eCategory, eDate, id);
-    er.addEvent(nE);
-    displayEvent();
-    $('#add-event')[0].reset();
-  });
+  //   let nE = new Event(name, eCategory, eDate, id);
+  //   er.addEvent(nE);
+  //   displayEvent();
+  //   $('#add-event')[0].reset();
+  // });
 
-  $('#delete-event').submit(function (e) {
-    e.preventDefault();
-    let id = $("#delete-event").find('#delete-event-id').val();
-    er.deleteEvent(id);
-    displayEvent();
-    $('#delete-event')[0].reset();
-  });
+  // $('#delete-event').submit(function (e) {
+  //   e.preventDefault();
+  //   let id = $("#delete-event").find('#delete-event-id').val();
+  //   er.deleteEvent(id);
+  //   displayEvent();
+  //   $('#delete-event')[0].reset();
+  // });
 
 
-  $('#date-search').submit(function (e) {
-    e.preventDefault();
-    let edate = new Date($("#date-search").find('#date-search-id').val());
-    let results = er.findEventsByDate(edate);
-    for (let event of results) {
-      let eventInfo = '';
-      //console.log('jquery date-search:', event.title, dateFormatter(date), event.category, event.eventId)
-      eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-      $("#search-results").html(eventInfo);
-    }
-    $('#date-search')[0].reset();
-  });
+  // $('#date-search').submit(function (e) {
+  //   e.preventDefault();
+  //   let edate = new Date($("#date-search").find('#date-search-id').val());
+  //   let results = er.findEventsByDate(edate);
+  //   for (let event of results) {
+  //     let eventInfo = '';
+  //     //console.log('jquery date-search:', event.title, dateFormatter(date), event.category, event.eventId)
+  //     eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+  //     $("#search-results").html(eventInfo);
+  //   }
+  //   $('#date-search')[0].reset();
+  // });
 
-  $('#category-search').submit(function (e) {
-    e.preventDefault();
-    let cat = $("#category-search").find('#category-search-id').val();
-    let results = er.findEventsbyCategory(cat);
+  // $('#category-search').submit(function (e) {
+  //   e.preventDefault();
+  //   let cat = $("#category-search").find('#category-search-id').val();
+  //   let results = er.findEventsbyCategory(cat);
 
-    for (let event of results) {
-      let eventInfo = '';
-      eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
-      $("#category-search-results").html(eventInfo);
-    }
-    $('#category-search')[0].reset();
-  });
+  //   for (let event of results) {
+  //     let eventInfo = '';
+  //     eventInfo += (`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+  //     $("#category-search-results").html(eventInfo);
+  //   }
+  //   $('#category-search')[0].reset();
+  // });
 
-  $('#save-user-event').submit(function (e) {
-    e.preventDefault();
-    let eId = $("#save-user-event").find('#save-event-id').val();
-    let uId = $("#save-user-event").find('#save-user-id').val();
-    let id = er.findUser(uId);
-    let event = er.findEvent(eId);
-    er.saveUserEvent(id, event);
-    $('#save-user-event')[0].reset();
-  });
+  // $('#save-user-event').submit(function (e) {
+  //   e.preventDefault();
+  //   let eId = $("#save-user-event").find('#save-event-id').val();
+  //   let uId = $("#save-user-event").find('#save-user-id').val();
+  //   let id = er.findUser(uId);
+  //   let event = er.findEvent(eId);
+  //   er.saveUserEvent(id, event);
+  //   $('#save-user-event')[0].reset();
+  // });
 
 });
 

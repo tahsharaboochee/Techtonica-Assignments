@@ -22,20 +22,6 @@ class EventRecommender {
     this.personalEvents = {};
   }
 
-  addEvent(eventObj) {
-    // Adds a new Event to the System
-    let cureventId = eventObj.eventId;
-    let validEvent = false;
-    this.events.forEach((curEventObj) =>{
-      if (cureventId === curEventObj.eventId){
-        validEvent = true;
-      }; 
-    });
-    if(validEvent){return "Event already saved! please, save a different event.";}
-    this.events.push(eventObj); // events adding obj's to arr
-  }
-  
-
   addUser(userObj) {
     // Adds a new User to the System
     let id = userObj.userId
@@ -51,32 +37,6 @@ class EventRecommender {
     this.personalEvents[id] = [];
   }
 
-  saveUserEvent(userObj, eventObj) {
-    // Allow users to save events to a personal Events array.
-    let curUserId = userObj.userId;
-    let cureventId = eventObj.eventId;
-    let validUser = false;
-    this.users.forEach((curUserObj) =>{
-      if (curUserId === curUserObj.userId){
-        validUser = true;
-      }
-    });
-    if(!validUser){return "User does not exist! please, add user.";}
-    let validEvent = false;
-    this.events.forEach((curEventObj) =>{
-      if (cureventId === curEventObj.eventId){
-        validEvent = true;
-      }; 
-    });
-    if(!validEvent){return "Event already saved! please, save a different event."};
-    for (let key in this.personalEvents){
-      if (key === curUserId){
-        this.personalEvents[curUserId].push(eventObj);
-      }
-    }  
-  }
-
-
   deleteUser(id) {
     // Deletes a User from the system
     if (this.users.length === 0) return "there are currently no users to delete add a user";
@@ -88,6 +48,19 @@ class EventRecommender {
     delete this.personalEvents[id];//delete user from personal events
   }
 
+  addEvent(eventObj) {
+    // Adds a new Event to the System
+    let cureventId = eventObj.eventId;
+    let validEvent = false;
+    this.events.forEach((curEventObj) =>{
+      if (cureventId === curEventObj.eventId){
+        validEvent = true;
+      }; 
+    });
+    if(validEvent){return "Event already saved! please, save a different event.";}
+    this.events.push(eventObj); // events adding obj's to arr
+  }
+  
   deleteEvent(id) {
     // Deletes the Event from the system
     if (this.events.length === 0) return "there are currently no events to delete";
@@ -119,21 +92,44 @@ class EventRecommender {
         date1.getMonth() === date2.getMonth()
       return true;
     }
-
     return this.events.filter(function (obj) {
       return checkDates(new Date(obj['date']), date);
     });
-
   }
-// helper methods
-findEventsbyCategory(category) {
-  // Returns all events in a given category
- let categoryResults = this.events.filter(function(obj) {
-      return obj['category'].trim() === category.trim();
-  });
-  return categoryResults;
-}
 
+  findEventsbyCategory(category) {
+    // Returns all events in a given category
+   let categoryResults = this.events.filter(function(obj) {
+        return obj['category'].trim() === category.trim();
+    });
+    return categoryResults;
+  }
+  saveUserEvent(userObj, eventObj) {
+    // Allow users to save events to a personal Events array.
+    let curUserId = userObj.userId;
+    let cureventId = eventObj.eventId;
+    let validUser = false;
+    this.users.forEach((curUserObj) =>{
+      if (curUserId === curUserObj.userId){
+        validUser = true;
+      }
+    });
+    if(!validUser){return "User does not exist! please, add user.";}
+    let validEvent = false;
+    this.events.forEach((curEventObj) =>{
+      if (cureventId === curEventObj.eventId){
+        validEvent = true;
+      }; 
+    });
+    if(!validEvent){return "Event already saved! please, save a different event."};
+    for (let key in this.personalEvents){
+      if (key === curUserId){
+        this.personalEvents[curUserId].push(eventObj);
+      }
+    }  
+  }
+
+// helper methods
   findEvent(eventId){
     for(let key in this.events){
       let curEvent = this.events[key].eventId
