@@ -100,7 +100,7 @@ class EventRecommender {
   findEventsbyCategory(category) {
     // Returns all events in a given category
    let categoryResults = this.events.filter(function(obj) {
-        return obj['category'].trim() === category.trim();
+        return obj['category'].trim().toLowerCase() === category.trim().toLowerCase();
     });
     return categoryResults;
   }
@@ -141,22 +141,25 @@ class EventRecommender {
     for(let key in this.events){
       let curEvent = this.events[key].eventId
       //returns an obj
-      if (curEvent === eventId){
+      if (curEvent == eventId){
         return this.events[key];
       } 
     }
-    return "Invalid event";
+
+    console.log('findEvent id invalid event', eventId);
+    return false;
   }
   
     findUser(userId){
       for(let key in this.users){
         let curUser = this.users[key].userId;
         //returns an object
-        if (curUser === userId) {
+        if (curUser == userId) {
           return this.users[key];
         }
       }
-      return "invalid user";
+      console.log('invalid user', userId);
+      return false;
     }
 
 }

@@ -138,12 +138,13 @@ $(document).ready(function () {
       eventId: $('#delete-event-id').val().trim()
     }
     let id = $('#delete-event-id').val().trim();
+    console.log('inside delete-event id: ', id)
     $.ajax({
-      url: `/api/users/${id}`,
+      url: `/api/events/${id}`,
       method: 'DELETE',
       data: id,
       success: function (data) {
-        console.log('ajax delete success:', data);
+        // console.log('ajax delete success:', data);
         fetchAndDisplayEvents();
         // location.reload();
       },
@@ -170,12 +171,12 @@ $(document).ready(function () {
     let edate = new Date($("#date-search").find('#date-search-id').val());
     $.ajax({
       type: 'GET',
-      url: '/api/events/${date}',
+      url: `/api/events/by-date/${edate}`,
       data: edate,
       success: function (events) {
         $.each(events, function (i, event) {
           // console.log('api/events ajax:', event)
-          $("#search-results").append(`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+          $("#search-results").append(`<li> Event: '${event.name}'<br> ${dateFormatter(event.date)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
         });
       },
       error: function () {
@@ -187,14 +188,15 @@ $(document).ready(function () {
 
   $('#category-search').submit(function (e) {
     e.preventDefault();
-    let cat = $("#category-search").find('#category-search-id').val();
+    let category = $("#category-search").find('#category-search-id').val();
+    console.log('inside category search: ', category)
     $.ajax({
       type: 'GET',
-      url: '/api/events/${category}',
-      data: cat,
+      url: `/api/events/by-category/${category}`,
+      data: category,
       success: function (events) {
         $.each(events, function (i, event) {
-          $("#category-search-results").append(`<li> Event: '${event.title}'<br> ${dateFormatter(event.eventDate)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
+          $("#category-search-results").append(`<li> Event: '${event.name}'<br> ${dateFormatter(event.date)}<br> Event Category: ${event.category}<br> Event Id: ${event.eventId}</li>`);
         });
       },
       error: function () {

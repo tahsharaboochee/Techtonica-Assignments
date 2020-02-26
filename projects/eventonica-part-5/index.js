@@ -6,14 +6,14 @@ er = new eventRecommender.EventRecommender();
 er.addUser({'name':'Tom','userId':'cf61b'});
 er.addUser({'name':'Sally','userId':'996a0'});
 er.addUser({'name':'Polly','userId':'569a1'});
-er.addEvent({"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
-er.addEvent({"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
-er.addEvent({"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
-er.addEvent( {"name":'Techtonia', "eventId": 4, "category":'example', "date":'2020-04-15'});
-er.saveUserEvent({'name':'Tom','userId':'cf61b'}, {"name":'Factorials!', "eventId": 1, "category":'Math', "date": '2020-02-17'});
-er.saveUserEvent({'name':'Sally','userId':'996a0'}, {"name":'War and Peace', "eventId": 2, "category":'reading', "date":'2020-03-23'});
-er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sport', "date":'2020-04-15'});
-er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Techtonia', "eventId": 4, "category":'example', "date":'2020-04-15'});
+er.addEvent({"name":'Factorials!', "eventId": 1, "category":'family', "date": '2020-02-17'});
+er.addEvent({"name":'War and Peace', "eventId": 2, "category":'Arts & Theater', "date":'2020-03-23'});
+er.addEvent({"name":'Beach Volley Ball', "eventId": 3, "category":'sports', "date":'2020-04-15'});
+er.addEvent( {"name":'Techtonia', "eventId": 4, "category":'Concerts', "date":'2020-04-15'});
+er.saveUserEvent({'name':'Tom','userId':'cf61b'}, {"name":'Factorials!', "eventId": 1, "category":'family', "date": '2020-02-17'});
+er.saveUserEvent({'name':'Sally','userId':'996a0'}, {"name":'War and Peace', "eventId": 2, "category":'Arts & Theater', "date":'2020-03-23'});
+er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Beach Volley Ball', "eventId": 3, "category":'sports', "date":'2020-04-15'});
+er.saveUserEvent({'name':'Polly','userId':'569a1'}, {"name":'Techtonia', "eventId": 4, "category":'Concerts', "date":'2020-04-15'});
 //es6 way of importing
 // import {EventRecommender} from './eventonica.js';// to get er class let er = new EventRecommender();
 
@@ -81,24 +81,24 @@ app.get('/api/events', function(req, res){
 })
 
 //display events by category
-app.get('/api/events-by-category/:category', function(req, res){
+app.get('/api/events/by-category/:category', function(req, res){
   let category = req.params.category; 
   console.log('events-by-category app.get:', 'category', category)
-  category = er.findEventsbyCategory(category)
+  foundEventsByCategory = er.findEventsbyCategory(category)
   if(category.length > 0){
-    res.status(200).send(category)
+    res.status(200).json(foundEventsByCategory)
   } else{
     res.status(400).send('no events for this category')
   }
 })
 
 //display events by date
-app.get('/api/events-by-date/:eventDate', function(req, res){
+app.get('/api/events/by-date/:eventDate', function(req, res){
   let date = req.params.eventDate; 
   console.log('events-by-date app.get:', 'date', date)
-  date = er.findEventsByDate(date)
-  if(date.length > 0){
-    res.status(200).send(date)
+  let foundEvents = er.findEventsByDate(date)
+  if(foundEvents.length > 0){
+    res.status(200).json(foundEvents)
   } else{
     res.status(400).send('no events for this date')
   }
@@ -112,7 +112,7 @@ app.post('/api/events', (req, res) =>{
     date: req.body.date
   };
 
-  if(er.findEvent(event.eventId) === "Invalid event"){
+  if(!er.findEvent(event.eventId)){
     er.addEvent(event);
   } else {
     res.status(400).send('event already exist!')
@@ -132,6 +132,7 @@ app.get('/api/events/:id', function(req, res){
 app.delete('/api/events/:id', function(req, res){
   const eventId = parseInt(req.params.id); 
   // console.log('id:', id)
+  console.log('server side app.delete:', eventId)
   const event = er.findEvent(eventId)
   if(event){
     er.deleteEvent(eventId);
@@ -153,7 +154,7 @@ app.put('/api/userEvents', (req, res) =>{
   //if there is no valid user ID, then display an error with the following message
   if(user && event) {
     er.saveUserEvent(user, event);
-    res.status(200).send(`Successfully added the event, ${event}`)
+    res.status(200).send(`Successfully added the event, ${event.name}`)
   } else {
     res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
   }
