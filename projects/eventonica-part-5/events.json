@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "name": "Tom", 
+      "id": "cf61b"
+    },
+    {
+      "name": "Sally", 
+      "id": "996a0"
+    },
+    {
+      "name":"Polly", 
+      "id": "569a1"
+    }
+  ]
+},
+{
+  "events": [
+    {
+      "name": "Beach Volley Ball", 
+      "category": "sport", 
+      "date": new Date('2020-04-15')
+    },
+    {
+      "name": "Factorials!", 
+      "category": "Math", 
+      "date": new Date('2020-02-17')},
+    {
+      "name": "War and Peace", 
+      "category": "reading", 
+      "date": new Date('2020-03-23')
+    }
+  ]
+},
+{
+  "userEvents": {
+    "cf61b":[{
+      "name": "Beach Volley Ball", 
+      "category": "sport", 
+      "date": "2020-04-15"
+      }],
+    "996a0":[{
+      "name": "Factorials!", 
+      "category": "Math", 
+      "date": "2020-02-17"
+      }],
+      "569a1":[{
+      "name": "War and Peace", 
+      "category": "reading", 
+      "date": "2020-03-23"
+      }]
+  }
+]
+}
