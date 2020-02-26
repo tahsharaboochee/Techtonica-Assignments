@@ -27,8 +27,6 @@ SET default_table_access_method = heap;
 CREATE TABLE public.like_photo (
     user_id integer NOT NULL,
     photo_id integer,
-    heart_photo boolean,
-    un_heart_photo boolean,
     date_liked date DEFAULT CURRENT_DATE NOT NULL
 );
 
@@ -183,11 +181,11 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: like_photo; Type: TABLE DATA; Schema: public; Owner: sql_prac
 --
 
-COPY public.like_photo (user_id, photo_id, heart_photo, un_heart_photo, date_liked) FROM stdin;
-1	1	t	\N	2020-02-25
-1	2	t	\N	2020-02-25
-2	3	t	\N	2020-02-25
-4	2	t	\N	2020-02-25
+COPY public.like_photo (user_id, photo_id, date_liked) FROM stdin;
+1	1	2020-02-25
+1	2	2020-02-25
+2	3	2020-02-25
+4	2	2020-02-25
 \.
 
 
@@ -294,13 +292,13 @@ ALTER TABLE ONLY public.photos
 --
 -- PostgreSQL database dump complete
 --
-
 -- Reading Data
 -- Find all the photos of one user (given their username)
 SELECT photo_url FROM photos
 WHERE user_id = 1;
 -- Find all the photos that one user Hearted
-SELECT * FROM like_photo INNER JOIN photos ON like_photo.photo_id = photos.photo_id WHERE like_photo.user_id= 1 AND like_photo.heart_photo = 't';
+SELECT * FROM like_photo INNER JOIN photos ON like_photo.photo_id = photos.photo_id WHERE like_photo.user_id= 1;
 -- Find all the Hearts for a given photo (given its primary key)
-SELECT * FROM like_photo INNER JOIN photos ON like_photo.photo_id = photos.photo_id WHERE photos.photo_url= 'photo2@example.com' AND like_photo.heart_photo = 't';
+SELECT * FROM like_photo INNER JOIN photos ON like_photo.photo_id = photos.photo_id WHERE photos.photo_url= 'photo2@example.com';
+
 
