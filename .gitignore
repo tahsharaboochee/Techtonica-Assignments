@@ -39,4 +39,4 @@ TDD.js
 lib/
 notes-app/
 .vscode/
-.jshintrc
+.jshintrcnode_modules/
