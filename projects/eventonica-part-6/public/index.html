@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/eventonica.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="py-5 mb-1 navbar navbar-expand-lg  mb-4 sticky-top lighten-1 text-light">
+            <div class="container text-light">
+
+                <a class="navbar-brand" href="#">Eventonica</a>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#all-users">User Management
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#all-events">Event Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#date-search">Search</a>
+                        </li>
+                    </ul>
+                </div>
+                <form class="form-inline ml-auto" id="keyword-search">
+                    <div class="md-form my-0">
+                        <input class="form-control" id="keyword-search-value" type="text" placeholder="Search"
+                            aria-label="Search">
+                    </div>
+                    <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit"
+                        id="keyword-button">Search</button>
+                </form>
+            </div>
+        </nav>
+        <h1 class="container form-title">Event Recommender</h1>
+        <div class="card">
+            <div class="card-body bg-light my-2">
+                <h2>Events Display</h2>
+                <div class="card-title">
+                    <div class="card-text ">
+                        <div class="events">
+                            <ul id="all-events">
+                                <!-- Use jQuery to display all Events here -->
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body bg-light my-2">
+                <h2>"Import Events from Ticketmaster".</h2>
+                <div class="card-title">
+                    <div class="card-text ">
+                        <div class="events">
+                            <form class="form-inline" id="ticketmaster">
+                                <label class="sr-only" for="Keyword"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Keyword Search</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="Beyonce">
+                                <button type="submit" id="ticketmaster-button"
+                                    class="btn btn-primary mb-2 mr-sm-2">Search</button>
+                            </form>
+                            <ul id="ticketmaster-events">
+                                <!-- Use jQuery to display all Events here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <h2>User Display</h2>
+                    <div class="card-title">
+                        <h3>All Users</h3>
+                        <div class="card-text ">
+                            <div class="user">
+                                <ul id="all-users">
+                                    <!-- Use jQuery to display all Users here -->
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body bg-light">
+                    <h2>Save Event for User</h2>
+                    <div class="card-title text-center">
+                        <div class="card-text eventSaver">
+                            <form class="form-inline" id="save-user-event">
+                                <label class="sr-only" for="save-user-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">User ID</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="save-user-id"
+                                    placeholder="996a0">
+
+                                <label class="sr-only userId" for="save-event-id"></label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-text"> Event ID</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="save-event-id"
+                                    placeholder="JaneDoe">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Add User</h3>
+                        <div class="card-text">
+                            <form class="form-inline" id="add-user">
+                                <label class="sr-only" for="add-user-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Id</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-id"
+                                    placeholder="996a0">
+
+                                <label class="sr-only userId" for="add-user-name"></label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-text"> Name</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-name"
+                                    placeholder="JaneDoe">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add User</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Add Event</h3>
+                        <div class="card-text">
+                            <form class="form-inline" id="add-event">
+                                <label class="sr-only" for="add-event-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Id</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="add-event-id"
+                                    placeholder="996a0">
+
+                                <label class="sr-only" for="add-event-name"></label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-text">Name</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="add-event-name"
+                                    placeholder="JaneDoe">
+                                <label class="sr-only" for="add-event-category"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Category</div>
+                                </div>
+                                <select class="form-control mb-2 mr-sm-2" id="add-event-category">
+                                    <option value="Concerts">Concerts</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Arts & Theater">Arts & Theater</option>
+                                    <option value="Family">Family</option>
+                                </select>
+
+                                <label class="sr-only" for="add-event-date"></label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-text">Event Date</div>
+                                </div>
+                                <input type="date" class="form-control mb-2 mr-sm-2" id="add-event-date"
+                                    value="2020-02-14" min="2020-01-01" max="2020-12-31">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add Event</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Find Events by Date</h3>
+                        <div class="card-text">
+                            <form class="form-inline" id="date-search">
+                                <label class="sr-only" for="date-search-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Event Date</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="date-search-id"
+                                    value="2020-02-14" min="2020-01-01" max="2020-12-31">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Find Event</button>
+                            </form>
+                            <h4>Results:</h4>
+                            <ol id="search-results">
+                                <!-- Use jQuery to add search results here-->
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Find Event by Category</h3>
+                        <div class="card-text">
+                            <div class="eventFinder">
+                            </div>
+                            <form class="form-inline" id="category-search">
+                                <label class="sr-only" for="add-event-category"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Category</div>
+                                </div>
+                                <select class="form-control mb-2 mr-sm-2" id="category-search-id">
+                                    <option value="Concerts">Concerts</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Arts & Theater">Arts & Theater</option>
+                                    <option value="Family">Family</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Find Event</button>
+                            </form>
+                            <h4> Results:</h4>
+                            <ol id="category-search-results">
+                                <!-- Use jQuery to add search results here-->
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Delete User</h3>
+                        <div class="card-text ">
+                            <form class="form-inline" id="delete-user">
+                                <label class="sr-only" for="delete-user-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">User Id</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="delete-user-id"
+                                    placeholder="996a0">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete User</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body bg-light">
+                    <div class="card-title text-center">
+                        <h3>Delete Event</h3>
+                        <div class="card-text ">
+                            <form class="form-inline" id="delete-event">
+                                <label class="sr-only" for="delete-event-id"></label>
+                                <div class="input-group mb-2 mx-sm-2">
+                                    <div class="input-group-text">Event Id</div>
+                                </div>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="delete-event-id"
+                                    placeholder="996a0">
+                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete Event</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+        <script src="/jQuery-scripts.js"></script>
+        <script src="/eventonica.js"></script>
+</body>
+
+</html>
