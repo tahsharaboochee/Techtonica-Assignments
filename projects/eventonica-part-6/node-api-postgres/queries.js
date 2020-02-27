@@ -9,7 +9,7 @@ const pool = new Pool({
 
 // Get all users
 const getUsers = (request, response) => {
-  pool.query('SELECT * FROM users', (error, results) => {
+  pool.query('SELECT * FROM users ORDER BY user_id ASC', (error, results) => {
     if (error){
       throw error
     }
@@ -37,7 +37,7 @@ const createUser = (request, response) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`User added with ID: ${result.insertId}`)
+    response.status(201).send(`User added with ID: ${results.insertId}`)
   })
 }
 

@@ -44,22 +44,11 @@ app.get('/', function (req, res) {
 //working
 app.get('/api/users', db.getUsers)
 //working
-app.post('/api/users', (req, res) =>{
-  const user = {
-    name: req.body.name,
-    userId: req.body.userId || Math.random().toString(16).substr(2, 5),
-  };
-  er.addUser(user);
-  res.json(user);
-})
+app.post('/api/users', db.createUser)
 
 //Display the information of specific User when you mention the id.
 // working
-app.get('/api/users/:id', function(req, res){
-  const id = req.params.id; 
-  const user = er.findUser(id);//checks
-  res.json(user);// send user infomation
-})
+app.get('/api/users/:id', db.getUserById)
 
 //delete user
 app.delete('/api/users/:id', function(req, res){
