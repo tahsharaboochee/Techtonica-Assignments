@@ -40,3 +40,4 @@ lib/
 notes-app/
 .vscode/
 .jshintrcnode_modules/
+node_modules/
