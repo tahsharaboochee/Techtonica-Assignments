@@ -51,17 +51,7 @@ app.post('/api/users', db.createUser)
 app.get('/api/users/:id', db.getUserById)
 
 //delete user
-app.delete('/api/users/:id', function(req, res){
-  const id = req.params.id; 
-  // console.log('id:', id)
-  const user = er.findUser(id)
-  if(user){
-    er.deleteUser(id);
-    res.status(200).send(`${user.name} has been deleted from the users`)
-  }else{
-    res.status(400).send('error user has not been deleted')
-  }
-})
+app.delete('/api/users/:id',db.deleteUser)
 
 //display events 
 app.get('/api/events', function(req, res){

@@ -74,7 +74,6 @@ function searchClick(e){
       //get user and display on page
       success: function (users) {
         //removes all child elements
-        console.log('users ajax:', users);
         $('#all-users').empty()
         $.each(users, function (i, user) {
           userInfo(user)
@@ -116,7 +115,7 @@ function searchClick(e){
     e.preventDefault();
     const user = {
       // name: $("#add-user").find('#add-user-name').val(),
-      user_id: $("#delete-user").find('#delete-user-id').val()
+      user_id: $('#delete-user-id').val()
     }
     let id = $("#delete-user").find('#delete-user-id').val();
     // console.log('id:', id, typeof id)
@@ -124,9 +123,9 @@ function searchClick(e){
     $.ajax({
       url: `/api/users/${id}`,
       method: 'DELETE',
-      data: id,
+      data: user,
       success: function (data) {
-        console.log('ajax delete succesS:', data);
+        // console.log('ajax delete succesS:', data);
         refreshUserList()
         // location.reload();
       },
@@ -153,7 +152,6 @@ function searchClick(e){
       url: '/api/events',
       //get event and display on page
       success: function (events) {
-        console.log('success:', events)
         $("#all-events").empty()
         $.each(events, function (i, event) {
           // console.log('api/events ajax:', event)
