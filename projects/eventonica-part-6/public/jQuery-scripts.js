@@ -154,7 +154,6 @@ function searchClick(e){
       success: function (events) {
         $("#all-events").empty()
         $.each(events, function (i, event) {
-          // console.log('api/events ajax:', event)
           eventInfo(event);
         });
       },
@@ -170,16 +169,18 @@ function searchClick(e){
     e.preventDefault();
     e.stopPropagation();
     const event = {
-      name: $("#add-event").find('#add-event-name').val(),
-      event_id: $("#add-event").find('#add-event-id').val(),
-      category: $("#add-event").find('#add-event-category').val(),
-      date: $("#add-event").find('#add-event-date').val()
+      name: $('#add-event-name').val(),
+      event_id: $('#add-event-id').val(),
+      category: $('#add-event-category').val(),
+      date: $('#add-event-date').val()
     }
+    console.log('jquery add-event event:', event)
     $.ajax({
       url: '/api/events',
       type: 'POST',
       data: event,
       success: function (newEvent) {
+        console.log('jquery addEvent newEvent', newEvent)
         eventInfo(newEvent);
       },
       error: function () {

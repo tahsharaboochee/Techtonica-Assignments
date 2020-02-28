@@ -86,12 +86,20 @@ const createEvent = (request, response) => {
     date
   } = request.body;
 
-  pool.query('INSERT INTO events (name, category, date) VALUES ($1, $2, $3)', [name, category, date], (error, results) => {
+  pool.query('INSERT INTO events (name, category, date) VALUES ($1, $2, $3) returning event_id', [name, category, date], (error, results) => {
     if (error) {
       throw error
     }
-    console.log(results)
-    response.status(201).send(`Event added with ID: ${results}`)
+    let id = results.rows[0].event_id
+    // console.log("insert and returning event_id: ", results)
+    pool.query(`SELECT * FROM events WHERE event_id = ${id}`, (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log('second query to see results: ', results, 'event_id:', id)
+      response.status(201).send(results.rows[0])
+    })
+    // console.log('createEvent database pool query results:', results)
   })
 }
 
