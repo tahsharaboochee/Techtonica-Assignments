@@ -196,11 +196,11 @@ function searchClick(e){
       event_id: $('#delete-event-id').val().trim()
     }
     let id = $('#delete-event-id').val().trim();
-    console.log('inside delete-event id: ', id)
+    console.log('inside delete-event jquery id: ', id)
     $.ajax({
       url: `/api/events/${id}`,
       method: 'DELETE',
-      data: id,
+      data: event,
       success: function (data) {
         // console.log('ajax delete success:', data);
         fetchAndDisplayEvents();
@@ -267,8 +267,8 @@ function searchClick(e){
 
   $('#save-user-event').submit(function (e) {
     e.preventDefault();
-    let eId = $("#save-user-event").find('#save-event-id').val();
-    let uId = $("#save-user-event").find('#save-user-id').val();
+    let eId = $('#save-event-id').val();
+    let uId = $('#save-user-id').val();
     $.ajax({
       type: 'PUT',
       url: '/api/userEvents',
@@ -281,6 +281,7 @@ function searchClick(e){
         }
       },
       success: function (response) {
+        console.log('save-user-jquery response', JSON.stringify(response))
         console.log('successfully added', response)
       }
     })

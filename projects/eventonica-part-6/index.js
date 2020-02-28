@@ -54,9 +54,7 @@ app.get('/api/users/:id', db.getUserById)
 app.delete('/api/users/:id',db.deleteUser)
 
 //display events 
-app.get('/api/events', function(req, res){
-  res.send(er.events);// send user infomation
-})
+app.get('/api/events', db.getEvents)
 
 //display events by category
 app.get('/api/events/by-category/:category', function(req, res){
@@ -82,61 +80,19 @@ app.get('/api/events/by-date/:eventDate', function(req, res){
   }
 })
 //create event
-app.post('/api/events', (req, res) =>{
-  const event = {
-    name: req.body.name,
-    eventId: req.body.eventId || Math.floor(Math.pow(10, 5) + Math.random() * (Math.pow(10, 6) - Math.pow(10, 5) - 1)),//random 6 digit number
-    category: req.body.category, 
-    date: req.body.date
-  };
-
-  if(!er.findEvent(event.eventId)){
-    er.addEvent(event);
-  } else {
-    res.status(400).send('event already exist!')
-  }
-  res.json(event);
-})
+app.post('/api/events', db.createEvent)
 
 //Display the information of specific event when you mention the id.
-app.get('/api/events/:id', function(req, res){
-  const id = parseInt(req.params.id); 
-  const event = er.findEvent(id);//checks
- 
-  res.json(event);// send user infomation
-})
+app.get('/api/events/:id', db.getEventById)
 
 //delete event by id
-app.delete('/api/events/:id', function(req, res){
-  const eventId = parseInt(req.params.id); 
-  // console.log('id:', id)
-  console.log('server side app.delete:', eventId)
-  const event = er.findEvent(eventId)
-  if(event){
-    er.deleteEvent(eventId);
-    res.status(200).send(`${event.name} has been deleted from events`)
-  }else{
-    res.status(400).send('error event has not been deleted')
-  }
-})
+app.delete('/api/events/:id', db.deleteEvent)
+
 //display userEvents
-app.get('/api/userEvents', (req, res) =>{
-  res.send(er.personalEvents);// send user infomation
-})
+app.get('/api/userEvents', db.createEvent)
 
 // edit saved events for user
-app.put('/api/userEvents', (req, res) =>{
-  const user = er.findUser(req.body.user['userId']);//checks
-  const event = er.findEvent(req.body.event['eventId']);//checks
-  console.log('inside app.put for userEvents: user: ', user, 'event: ', event)
-  //if there is no valid user ID, then display an error with the following message
-  if(user && event) {
-    er.saveUserEvent(user, event);
-    res.status(200).send(`Successfully added the event, ${event.name}`)
-  } else {
-    res.status(404).send('<h2 style="font-family: Malgun Gothic; color darkred;">Oooops... Cant find what you are looking for</h2>');
-  }
-})
+app.put('/api/userEvents', db.saveEventForUser)
 
 //PORT environment variable
 const port = process.env.PORT || 8080; //process environment
