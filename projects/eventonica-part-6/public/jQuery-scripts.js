@@ -21,14 +21,10 @@ function searchClick(e){
   request.open("GET", `http://app.ticketmaster.com/discovery/v1/events.json?keyword=${keyword}&source=universe&countryCode=US&apikey=i3iTEyBGu6DSxPykBtaEllniCz2OLxOj`, true)
   request.onload = function(){
     //accessing events through JSON data
-    // console.log('inside of the search click response:', this.response)
     let data = JSON.parse(this.response);
     data = data._embedded.events
     if (request.status >= 200 && request.status < 400) {
-      // console.log('inside of the search click:', data.name, datat)
       data.forEach(event => {
-        console.log('inside of the search click data:', event)
-        // console.log('inside of the json data obj:', event)
         card.setAttribute('class', 'card')
         const ul = document.getElementById('ticketmaster-events');
         const ul1 = document.getElementById('all-events');
@@ -116,14 +112,12 @@ function searchClick(e){
       user_id: $('#delete-user-id').val()
     }
     let id = $("#delete-user").find('#delete-user-id').val();
-    // console.log('id:', id, typeof id)
     //make an api call with type DELETE
     $.ajax({
       url: `/api/users/${id}`,
       method: 'DELETE',
       data: user,
       success: function (data) {
-        // console.log('ajax delete succesS:', data);
         refreshUserList()
         // location.reload();
       },
@@ -172,13 +166,12 @@ function searchClick(e){
       category: $('#add-event-category').val(),
       date: $('#add-event-date').val()
     }
-    console.log('jquery add-event event:', event)
+
     $.ajax({
       url: '/api/events',
       type: 'POST',
       data: event,
       success: function (newEvent) {
-        console.log('jquery addEvent newEvent', newEvent)
         eventInfo(newEvent);
       },
       error: function () {
@@ -195,13 +188,11 @@ function searchClick(e){
       event_id: $('#delete-event-id').val().trim()
     }
     let id = $('#delete-event-id').val().trim();
-    console.log('inside delete-event jquery id: ', id)
     $.ajax({
       url: `/api/events/${id}`,
       method: 'DELETE',
       data: event,
       success: function (data) {
-        // console.log('ajax delete success:', data);
         fetchAndDisplayEvents();
         // location.reload();
       },
@@ -215,7 +206,6 @@ function searchClick(e){
 
   // date formatter
   function dateFormatter(date) {
-    // console.log('inside date Formatter', date)
     date = new Date(date);
     let day = date.getUTCDate();
     let month = date.getMonth() + 1;
@@ -244,7 +234,6 @@ function searchClick(e){
   $('#category-search').submit(function (e) {
     e.preventDefault();
     let category = $('#category-search-id').val();
-    console.log('inside category search: ', category)
     $.ajax({
       type: 'GET',
       url: `/api/events/by-category/${category}`,
