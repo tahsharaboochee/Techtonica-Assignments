@@ -68,13 +68,35 @@ const getEvents = (request, response) => {
 
 //get event by id
 const getEventById = (request, response) => {
-  const id = parseInt(request.params.event_id)
+  const id = parseInt(request.body.event_id)
   // we’re looking for id=$1. In this instance, $1 is a numbered placeholder
-  pool.query('SELECT * FROM events WHERE event_id = $1', (error, results) => {
+  pool.query('SELECT * FROM events WHERE event_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
+  })
+}
+//get event by date
+const getEventByDate = (request, response) => {
+  const date = request.params.eventDate;
+  // we’re looking for id=$1. In this instance, $1 is a numbered placeholder
+  pool.query(`SELECT * FROM events WHERE date = '${date}'`, (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results)
+  })
+}
+//get event by category
+const getEventByCategory = (request, response) => {
+  const category = request.params.category;
+  // we’re looking for id=$1. In this instance, $1 is a numbered placeholder
+  pool.query(`SELECT * FROM events WHERE category = $1`, [category], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results)
   })
 }
 
@@ -91,15 +113,12 @@ const createEvent = (request, response) => {
       throw error
     }
     let id = results.rows[0].event_id
-    // console.log("insert and returning event_id: ", results)
     pool.query(`SELECT * FROM events WHERE event_id = ${id}`, (error, results) => {
       if (error) {
         throw error
       }
-      console.log('second query to see results: ', results, 'event_id:', id)
       response.status(201).send(results.rows[0])
     })
-    // console.log('createEvent database pool query results:', results)
   })
 }
 
@@ -119,7 +138,6 @@ const deleteEvent = (request, response) => {
 const saveEventForUser = (request, response) => {
   const user_id = parseInt(request.body.user.user_id)
   const event_id = parseInt(request.body.event.event_id)
-  // console.log('saveEventforUser: request', request)
 
   pool.query(`INSERT INTO userevents (user_id, event_id) 
               SELECT $1, $2 
@@ -148,6 +166,8 @@ module.exports = {
   deleteUser,
   getEvents,
   getEventById,
+  getEventByDate,
+  getEventByCategory,
   createEvent,
   deleteEvent,
   saveEventForUser

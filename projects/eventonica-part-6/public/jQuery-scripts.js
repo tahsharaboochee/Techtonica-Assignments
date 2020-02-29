@@ -4,8 +4,7 @@ $(document).ready(function () {
   const card = document.createElement('div')
 
 document.getElementById('keyword-button').onclick = searchClick;
-// document.getElementById('keyword-button').onclick = searchClick;
-document.getElementById('category-search').onclick = searchClick;
+document.getElementById('keyword').onclick = searchClick;
 //when user enters keyword a request will be sent to ticketmaster's API
 function searchClick(e){
   e.preventDefault();
@@ -25,7 +24,6 @@ function searchClick(e){
     // console.log('inside of the search click response:', this.response)
     let data = JSON.parse(this.response);
     data = data._embedded.events
-    let category = document.getElementById("category-search")
     if (request.status >= 200 && request.status < 400) {
       // console.log('inside of the search click:', data.name, datat)
       data.forEach(event => {
@@ -227,14 +225,12 @@ function searchClick(e){
 
   $('#date-search').submit(function (e) {
     e.preventDefault();
-    let edate = new Date($("#date-search").find('#date-search-id').val());
+    let edate = $('#date-search-id').val();
     $.ajax({
       type: 'GET',
       url: `/api/events/by-date/${edate}`,
-      data: edate,
       success: function (events) {
-        $.each(events, function (i, event) {
-          // console.log('api/events ajax:', event)
+        $.each(events.rows, function (i, event) {
           $("#search-results").append(`<li> Event: '${event.name}'<br> ${dateFormatter(event.date)}<br> Event Category: ${event.category}<br> Event Id: ${event.event_id}</li>`);
         });
       },
@@ -247,14 +243,14 @@ function searchClick(e){
 
   $('#category-search').submit(function (e) {
     e.preventDefault();
-    let category = $("#category-search").find('#category-search-id').val();
+    let category = $('#category-search-id').val();
     console.log('inside category search: ', category)
     $.ajax({
       type: 'GET',
       url: `/api/events/by-category/${category}`,
-      data: category,
+      // data: category,
       success: function (events) {
-        $.each(events, function (i, event) {
+        $.each(events.rows, function (i, event) {
           $("#category-search-results").append(`<li> Event: '${event.name}'<br> ${dateFormatter(event.date)}<br> Event Category: ${event.category}<br> Event Id: ${event.event_id}</li>`);
         });
       },

@@ -57,28 +57,10 @@ app.delete('/api/users/:id',db.deleteUser)
 app.get('/api/events', db.getEvents)
 
 //display events by category
-app.get('/api/events/by-category/:category', function(req, res){
-  let category = req.params.category; 
-  console.log('events-by-category app.get:', 'category', category)
-  foundEventsByCategory = er.findEventsbyCategory(category)
-  if(category.length > 0){
-    res.status(200).json(foundEventsByCategory)
-  } else{
-    res.status(400).send('no events for this category')
-  }
-})
+app.get('/api/events/by-category/:category', db.getEventByCategory)
 
 //display events by date
-app.get('/api/events/by-date/:eventDate', function(req, res){
-  let date = req.params.eventDate; 
-  console.log('events-by-date app.get:', 'date', date)
-  let foundEvents = er.findEventsByDate(date)
-  if(foundEvents.length > 0){
-    res.status(200).json(foundEvents)
-  } else{
-    res.status(400).send('no events for this date')
-  }
-})
+app.get('/api/events/by-date/:eventDate', db.getEventByDate)
 //create event
 app.post('/api/events', db.createEvent)
 
