@@ -33,6 +33,9 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "babel-cli": "^6.26.0",
     "babel-register": "^6.26.0",
-    "babel-watch": "^7.0.0"
+    "babel-watch": "^7.0.0",
+    "mocha": "^7.1.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   }
 }
