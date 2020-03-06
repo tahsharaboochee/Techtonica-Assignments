@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import {Messages, Message} from '../src/components/Messages';
+import RemainingCharacters from '../src/components/RemainingCharacters';
+
 const users = {
   Tahshara: 'Tahshara',
   Lisa: 'Lisa',
@@ -6,15 +9,7 @@ const users = {
   Amy: 'Amy',
   Gloria: 'Gloria',
 }
-class Message {
-  constructor(text, user) {
-    let date = new Date()
-    this.key = date.toString()
-    this.text = text
-    this.user = user
-    this.date = date
-  }
-}
+
 
 function App() {
   const [user, setUser] = useState(users.User1);

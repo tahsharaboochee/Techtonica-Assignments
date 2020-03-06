@@ -1,5 +1,6 @@
 import React from 'react';
-import RemainingCharacters from '../src/App';
+import RemainingCharacters from '../src/components/RemainingCharacters'
+
 import Enzyme, { shallow, render, mount } from 'enzyme';
 
 
@@ -9,7 +10,6 @@ describe('<RemainingCharacters charCount={charCount} />', () => {
       value: 'Hello World'
     }
     let RemainingCharactersComponent = mount(<RemainingCharacters {...props} />);
-    // let wrapper = shallow(<RemainingCharacters/>);
-    expect(RemainingCharactersComponent.prop('value')).toBeString();
+    expect(RemainingCharactersComponent.prop('value')).toBe('Hello World');
   })
 });

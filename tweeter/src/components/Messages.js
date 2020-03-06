@@ -1,7 +1,16 @@
 import React from 'react'
 
+export class Message {
+  constructor(text, user) {
+    let date = new Date()
+    this.key = date.toString()
+    this.text = text
+    this.user = user
+    this.date = date
+  }
+}
 
-function Messages({messages}) {
+export function Messages({messages}) {
   //<Messages/>
   if (messages.length === 0) {
     return (
@@ -12,12 +21,12 @@ function Messages({messages}) {
     <div>
     <h2>Posts:</h2>
     <ul>
-      {messages.sort((a, b) => b.date - a.date).map(message => (
-        <li key={message.key}>{message.text} - {message.user} - {message.key}</li>
-      ))}
+      {messages.sort((a, b) => b.date - a.date).map((message, i) => (
+        <li key="{i}">{message.text} - {message.user} - {message.key}</li>
+      ))} 
     </ul>
     </div>
   );
 }
 
-export default Messages
+// export default Messages
