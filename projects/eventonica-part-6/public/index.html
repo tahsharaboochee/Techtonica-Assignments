@@ -36,7 +36,7 @@
                 <form class="form-inline ml-auto" id="keyword-search">
                     <div class="md-form my-0">
                         <input class="form-control" id="keyword-search-value" type="text" placeholder="Search"
-                            aria-label="Search">
+                            aria-label="Search"/>
                     </div>
                     <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit"
                         id="keyword-button">Search</button>
@@ -71,7 +71,7 @@
                                 <div class="input-group mb-2 mx-sm-2">
                                     <div class="input-group-text">Keyword Search</div>
                                 </div>
-                                <input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="Beyonce">
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="keyword" placeholder="Beyonce"/>
                                 <button type="submit" id="ticketmaster-button"
                                     class="btn btn-primary mb-2 mr-sm-2">Search</button>
                             </form>
@@ -112,14 +112,14 @@
                                     <div class="input-group-text">User ID</div>
                                 </div>
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="save-user-id"
-                                    placeholder="996a0">
+                                    placeholder="996a0"/>
 
                                 <label class="sr-only userId" for="save-event-id"></label>
                                 <div class="input-group mb-2 mr-sm-2">
                                     <div class="input-group-text"> Event ID</div>
                                 </div>
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="save-event-id"
-                                    placeholder="JaneDoe">
+                                    placeholder="JaneDoe"/>
                                 <button type="submit" class="btn btn-primary mb-2 mr-sm-2">save</button>
                             </form>
                         </div>
@@ -140,7 +140,7 @@
                                     <div class="input-group-text"> Name</div>
                                 </div>
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="add-user-name"
-                                    placeholder="JaneDoe">
+                                    placeholder="JaneDoe"/>
                                 <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add User</button>
                             </form>
                         </div>
@@ -152,31 +152,32 @@
                     <div class="card-title text-center">
                         <h3>Add Event</h3>
                         <div class="card-text">
-                                <label class="sr-only" for="add-event-name"></label>
-                                <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-text">Name</div>
-                                </div>
-                                <input type="text" class="form-control mb-2 mr-sm-2" id="add-event-name"
-                                    placeholder="Techtonica">
-                                <label class="sr-only" for="add-event-category"></label>
-                                <div class="input-group mb-2 mx-sm-2">
-                                    <div class="input-group-text">Category</div>
-                                </div>
-                                <select class="form-control mb-2 mr-sm-2" id="add-event-category">
-                                    <option value="Concerts">Concerts</option>
-                                    <option value="Sports">Sports</option>
-                                    <option value="Arts & Theater">Arts & Theater</option>
-                                    <option value="Family">Family</option>
-                                </select>
+                          <form>
+                            <label class="sr-only" for="add-event-name"></label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-text">Name</div>
+                            </div>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="add-event-name"
+                                placeholder="Techtonica"/>
+                            <label class="sr-only" for="add-event-category"></label>
+                            <div class="input-group mb-2 mx-sm-2">
+                                <div class="input-group-text">Category</div>
+                            </div>
+                            <select class="form-control mb-2 mr-sm-2" id="add-event-category">
+                                <option value="Concerts">Concerts</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Arts & Theater">Arts & Theater</option>
+                                <option value="Family">Family</option>
+                            </select>
 
-                                <label class="sr-only" for="add-event-date"></label>
-                                <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-text">Event Date</div>
-                                </div>
-                                <input type="date" class="form-control mb-2 mr-sm-2" id="add-event-date"
-                                    value="2020-02-14" min="2020-01-01" max="2020-12-31">
-                                <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add Event</button>
-                            </form>
+                            <label class="sr-only" for="add-event-date"></label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-text">Event Date</div>
+                            </div>
+                            <input type="date" class="form-control mb-2 mr-sm-2" id="add-event-date"
+                                value="2020-02-14" min="2020-01-01" max="2020-12-31"/>
+                            <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Add Event</button>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -194,7 +195,7 @@
                                     <div class="input-group-text">Event Date</div>
                                 </div>
                                 <input type="date" class="form-control mb-2 mr-sm-2" id="date-search-id"
-                                    value="2020-02-14" min="2020-01-01" max="2020-12-31">
+                                    value="2020-02-14" min="2020-01-01" max="2020-12-31"/>
                                 <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Find Event</button>
                             </form>
                             <h4>Results:</h4>
@@ -227,7 +228,6 @@
                             </form>
                             <h4> Results:</h4>
                             <ol id="category-search-results">
-                                <!-- Use jQuery to add search results here-->
                             </ol>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                                     <div class="input-group-text">User Id</div>
                                 </div>
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="delete-user-id"
-                                    placeholder="996a0">
+                                    placeholder="996a0"/>
                                 <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete User</button>
                             </form>
                         </div>
@@ -266,7 +266,7 @@
                                     <div class="input-group-text">Event Id</div>
                                 </div>
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="delete-event-id"
-                                    placeholder="996a0">
+                                    placeholder="996a0"/>
                                 <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Delete Event</button>
                             </form>
                         </div>
@@ -275,10 +275,12 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-        <script src="/jQuery-scripts.js"></script>
-        <script src="/eventonica.js"></script>
+        
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="/jQuery-scripts.js"></script>
+    <script src="/eventonica.js"></script>
 </body>
 
 </html>
