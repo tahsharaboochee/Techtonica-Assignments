@@ -15,32 +15,7 @@ class Message {
     this.date = date
   }
 }
-function Messages({messages}) {
-  //<Messages/>
-  if (messages.length === 0) {
-    return (
-      <div>No posts found</div>
-    );
-  }
-  return (
-    <div>
-    <h2>Posts:</h2>
-    <ul>
-      {messages.sort((a, b) => b.date - a.date).map(message => (
-        <li key={message.key}>{message.text} - {message.user} - {message.key}</li>
-      ))}
-    </ul>
-    </div>
-  );
-}
-function RemainingCharacters({charCount}) {
-  let maxChars = 100;
-  let remainingChars = maxChars - charCount;
-  if (remainingChars <= 0) {
-    return (<p style={{color: "red"}}>Characters left: {remainingChars}</p>);
-  }
-  return (<p>Characters left: {remainingChars}</p>);
-}
+
 function App() {
   const [user, setUser] = useState(users.User1);
   const [newPost, setNewPost] = useState("");
