@@ -12,6 +12,6 @@ describe('Message', () => {
     expect(wrapped).toMatchSnapshot();
   });
   it('renders the Messages children', () => { 
-    expect(wrapped.find('ul').text()).toEqual(`${message.text} - ${message.user} - ${message.key}`);
+    expect(wrapped.find('ul').text()).toEqual(`${message.text} - ${message.user} - ${message.dateString}`);
   });
 });

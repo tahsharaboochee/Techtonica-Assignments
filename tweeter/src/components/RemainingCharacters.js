@@ -4,9 +4,9 @@ function RemainingCharacters({charCount}) {
   let maxChars = 100;
   let remainingChars = maxChars - charCount;
   if (remainingChars <= 0) {
-    return (<p className="counter" style={{color: "red"}}>Characters left: {remainingChars}</p>);
+    return (<div><p className="counter" style={{color: "red"}}>Characters left: {remainingChars}</p></div>);
   }
-  return (<p className="counter">Characters left: {remainingChars}</p>);
+  return (<div><p className="counter">Characters left: {remainingChars}</p></div>);
 }
 
 export default RemainingCharacters
