@@ -50,6 +50,7 @@ const deleteUser = (request, response) => {
     if (error) {
       throw error
     }
+    // console.log('deleteUser respons: ', response, 'deleteUser request:', request)
     response.status(200).send(`User deleted with ID: ${id}`)
   })
 }

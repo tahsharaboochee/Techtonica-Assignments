@@ -25,6 +25,9 @@ const Joi = require('joi');
 let express = require('express'); //es5 way of importing express
 let app = express();
 const db = require('/Users/tahsharaboochee/codingPractice/techtonica/assignments/projects/eventonica-part-6/node-api-postgres/queries.js')
+const cors = require("cors");
+app.use(cors());
+
 
 app.use(express.json()); // to use the json file
 // import bodyParser from 'body-parser'; //body parser parses the json that is sent via request/post and allows it to be manipulated via javascript
