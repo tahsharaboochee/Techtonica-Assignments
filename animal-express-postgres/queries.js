@@ -7,16 +7,27 @@ const pool = new Pool({
   port: 5432,
 })
 
-const getSpecies = (req, res) => {
-  pool.query('SELECT * FROM sightings JOIN tracked_species ON sightings.tracked_specie_id = tracked_species.tracked_specie_id ORDER BY specie_id ASC', (error, results) => {
-    console.log('inside queries response', res)
+const getSpecies  = (req, res) => {
+  pool.query('SELECT * FROM species ORDER BY specie_id ASC', (error, results) => {
+    // console.log('inside queries response', results)
     if (error) { 
       throw error
     }
-    res.status(200).json(res.rows)
+    res.status(200).json(results.rows)
+  });
+}
+
+const getSightedSpecies = (req, res) => {
+  pool.query('SELECT * FROM sightings JOIN tracked_species ON sightings.tracked_specie_id = tracked_species.tracked_specie_id ORDER BY tracked_specie_id ASC', (error, results) => {
+    // console.log('inside queries response', results)
+    if (error) { 
+      throw error
+    }
+    res.status(200).json(results.rows)
   });
 }
 
 module.exports = {
-  getSpecies
+  getSpecies,
+  getSightedSpecies
 }
