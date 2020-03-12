@@ -19,11 +19,11 @@ The build is minified and the filenames include the hashes.
 
 # Postgres Database
 The text files created by pg_dump are intended to be read in by the psql program. The general command form to restore a dump is below 
-Recreate my database by psql dbname < db.sql
+Recreate my database by psql dbname < db.pgsql
 
 # Data
 # Species
-This app will store data about different endangered species (e.g. polar bears, tigers). For each species, it stores:
+This app will display data about different endangered species (e.g. polar bears, tigers). For each species, it displays:
 
 the common name (e.g. tiger)
 scientific name (e.g. Procyon lotor)
@@ -32,7 +32,7 @@ conservation status code (e.g. CR, EN, LC)
 record creation timestamp
 
 # Individuals
-Scientists track some individual animals of endangered species, so we store data about each individual as well
+Scientists track some individual animals of endangered species, so we display data about each individual as well
 
 Each animal has a unique ID
 Nickname (e.g. "Prickly Petunia")
@@ -40,7 +40,7 @@ Species
 email address of sighter in case researchers need more info
 record creation timestamp
 # Sightings
-When scientists spot an individual they’re tracking, they want to store some information about the sighting in the database: - The date and time of the sighting
+When scientists spot an individual they’re tracking, we display some information about the sighting: -The date and time of the sighting
 
 Individual seen
 Location of sighting - just text so the scientist can be as specific as they want: "37.791278, -122.394680", "Yellowstone North Gate" or just "California"
