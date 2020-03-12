@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Card, CardBody, CardGroup, CardImg} from 'reactstrap'
 import './App.css';
 import DisplaySpecies from './DisplaySpecies'
+import DisplaySightedSpecies from './DisplaySpecies'
 import AddSighting from './AddSighting'
 
 
 class App extends Component {
   state = {
-    species: []
+    species: [],
+    sightedSpecies: []
   };
   
   fetchAndDisplaySpecies(){
@@ -27,9 +29,9 @@ class App extends Component {
       headers: {Accept: "application/json"}
     })
       .then(res => res.json())
-      .then(species => {
-        console.log(species)
-        this.setState({species: species})
+      .then(sightedSpecies => {
+        console.log(sightedSpecies)
+        this.setState({sightedSpecies: sightedSpecies})
       })
       .catch(err => console.error(err))
   }
@@ -43,6 +45,7 @@ class App extends Component {
     return (
       <div className="App">
         <DisplaySpecies species={this.state.species} /> 
+        <DisplaySightedSpecies species={this.state.sightedSpecies} /> 
         <AddSighting fetchAndDisplaySpecies={this.fetchAndDisplaySpecies.bind(this)}/>
       
       </div>

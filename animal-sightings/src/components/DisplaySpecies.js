@@ -8,7 +8,7 @@ const DisplaySpecies = ({species}) =>{
       <center><h3>All Species</h3></center>
       {species.map((species) =>(
         <ul key={species.tracked_species_id}>
-          <li>{species.name} specie_id:{species.tracked_specie_id} Overall Health:{species.specie_health} Location: {species.location_sighted} Date:{species.date_sighted} </li>
+          <li>Common Name:{species.common_name} Scientific Name: {species.scientific_name} Conservation Status: {species.conservation_status} Population:{species.num_living} specie_id:{species.specie_id}</li>
         </ul>
       ))}
     </Card>

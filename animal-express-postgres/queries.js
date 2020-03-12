@@ -18,7 +18,7 @@ const getSpecies  = (req, res) => {
 }
 
 const getSightedSpecies = (req, res) => {
-  pool.query('SELECT * FROM sightings JOIN tracked_species ON sightings.tracked_specie_id = tracked_species.tracked_specie_id ORDER BY tracked_specie_id ASC', (error, results) => {
+  pool.query('SELECT * FROM sightings JOIN tracked_species ON sightings.tracked_specie_id = tracked_species.tracked_specie_id ORDER BY sightings.tracked_specie_id ASC', (error, results) => {
     // console.log('inside queries response', results)
     if (error) { 
       throw error
