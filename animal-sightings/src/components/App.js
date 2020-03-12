@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, CardGroup, CardImg} from 'reactstrap'
+import {Card, CardText, CardTitle, Col, Row, Navbar, NavbarText} from 'reactstrap'
 import './App.css';
 import DisplaySpecies from './DisplaySpecies'
 import DisplayTrackedSpecies from './DisplayTrackedSpecies'
@@ -55,15 +55,40 @@ class App extends Component {
 
   render (){
     return (
-      <div className="App">
-        <DisplaySpecies species={this.state.species} /> 
-        <DisplayTrackedSpecies tracked_species={this.state.trackedSpecies} /> 
-        <DisplaySightedSpecies sighted={this.state.sightedSpecies} /> 
-        <AddSighting fetchAndDisplaySightedSpecies={this.fetchAndDisplaySightedSpecies.bind(this)}/>
-      
+      <div>
+        <Row>
+        <Col sm="6">
+          <Card body>
+            <CardText><DisplayTrackedSpecies tracked_species={this.state.trackedSpecies} /> </CardText>
+          </Card>
+        </Col>
+        <Col sm="6">
+          <Card body>
+            <CardText><DisplaySpecies species={this.state.species} /> </CardText>
+          </Card>
+        </Col>
+        <Col sm="6">
+          <Card body>
+            <CardText><DisplaySightedSpecies sighted={this.state.sightedSpecies} /></CardText>
+          </Card>
+        </Col>
+        <Col sm="6">
+          <Card body>
+            <CardText><AddSighting fetchAndDisplaySightedSpecies={this.fetchAndDisplaySightedSpecies.bind(this)}/></CardText>
+          </Card>
+        </Col>
+        </Row>
+
       </div>
-    );
+    )
   }
 }
 
 export default App;
+{/* <div className="App">
+<DisplaySpecies species={this.state.species} /> 
+<DisplayTrackedSpecies tracked_species={this.state.trackedSpecies} /> 
+<DisplaySightedSpecies sighted={this.state.sightedSpecies} /> 
+<AddSighting fetchAndDisplaySightedSpecies={this.fetchAndDisplaySightedSpecies.bind(this)}/>
+
+</div> */}

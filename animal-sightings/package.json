@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,5 +31,14 @@
   "proxy": "http://localhost:5000",
   "keywords": [],
   "author": "Tahshara Boochee",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react-app": "^7.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "mocha": "^7.1.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
+  }
 }
