@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import {Card, CardBody, CardGroup, CardImg} from 'reactstrap'
 import './App.css';
 import DisplaySpecies from './DisplaySpecies'
-import DisplaySightedSpecies from './DisplaySpecies'
+import DisplayTrackedSpecies from './DisplayTrackedSpecies'
+import DisplaySightedSpecies from './DisplaySightedSpecies'
 import AddSighting from './AddSighting'
 
 
 class App extends Component {
   state = {
     species: [],
+    trackedSpecies: [],
     sightedSpecies: []
   };
   
@@ -18,8 +20,18 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(species => {
-        console.log(species)
         this.setState({species: species})
+      })
+      .catch(err => console.error(err))
+  }
+
+  fetchAndDisplayTrackedSpecies(){
+    fetch("http://localhost:5000/trackedSpecies", {
+      headers: {Accept: "application/json"}
+    })
+      .then(res => res.json())
+      .then(trackedSpecies => {
+        this.setState({trackedSpecies: trackedSpecies})
       })
       .catch(err => console.error(err))
   }
@@ -30,7 +42,6 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(sightedSpecies => {
-        console.log(sightedSpecies)
         this.setState({sightedSpecies: sightedSpecies})
       })
       .catch(err => console.error(err))
@@ -38,6 +49,7 @@ class App extends Component {
 
   componentDidMount(){
     this.fetchAndDisplaySpecies()
+    this.fetchAndDisplayTrackedSpecies()
     this.fetchAndDisplaySightedSpecies()
   }
 
@@ -45,8 +57,9 @@ class App extends Component {
     return (
       <div className="App">
         <DisplaySpecies species={this.state.species} /> 
-        <DisplaySightedSpecies species={this.state.sightedSpecies} /> 
-        <AddSighting fetchAndDisplaySpecies={this.fetchAndDisplaySpecies.bind(this)}/>
+        <DisplayTrackedSpecies tracked_species={this.state.trackedSpecies} /> 
+        <DisplaySightedSpecies sighted={this.state.sightedSpecies} /> 
+        <AddSighting fetchAndDisplaySightedSpecies={this.fetchAndDisplaySightedSpecies.bind(this)}/>
       
       </div>
     );

@@ -18,7 +18,9 @@ app.get('/', (request, response) => {
 })
 
 app.get('/species', db.getSpecies)
+app.get('/trackedSpecies', db.getTrackedSpecies)
 app.get('/sightedSpecies', db.getSightedSpecies)
+app.post('/sightedSpecies', db.createSighting)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

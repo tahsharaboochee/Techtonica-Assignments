@@ -20,7 +20,7 @@ function AddSighting(props){
 
   const CreateSighting = e => {
     e.preventDefault()
-    fetch('http://localhost:5000/species', {
+    fetch('http://localhost:5000/sightedSpecies', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -32,7 +32,7 @@ function AddSighting(props){
     })
     .then(res =>{
       if(res.ok){
-        props.fetchAndDisplaySpecies()
+        props.fetchAndDisplaySightedSpecies()
       }
     })
     .catch(err => console.error(err))
@@ -44,14 +44,14 @@ function AddSighting(props){
     <center><h3>Add Sighting</h3></center>
       <Form onSubmit={CreateSighting}>
         <FormGroup>
-          <Label for="name">Specie Id:</Label> 
-          <Input type='text' name='tracked_specie_id' id='tracked_specie_id' onChange={handleSightingInfo} value={sightingInfo.tracked_specie_id} ></Input>
+          <Label for="name">Tracked Specie ID:</Label> 
+          <Input type="text" name='tracked_specie_id' id="tracked_specie_id"  value={sightingInfo.tracked_specie_id} onChange={handleSightingInfo}></Input>
           <Label for="name">Specie_health:</Label> 
           <Input type="text" name='specie_health' id="specie_health"  value={sightingInfo.specie_health} onChange={handleSightingInfo}></Input>
           <Label for="name">Location Sighted:</Label> 
           <Input type="text" name='location_sighted' id="location_sighted"  value={sightingInfo.location_sighted} onChange={handleSightingInfo}></Input>
           <Label for="name">Date:</Label> 
-          <Input type='date' name='date' id='date' min="2020-01-01" max="2020-12-31" onChange={handleSightingInfo} value={sightingInfo.date} ></Input> 
+          <Input type='date' name='date' id='date' min="2020-01-01" max="2020-12-31" onChange={handleSightingInfo} value={sightingInfo.date_sighted} ></Input> 
         </FormGroup>
         <Button color='success'>Add Sighting</Button>
       </Form>
